@@ -27,7 +27,7 @@
    - Launch blog cadence, run A/B tests on CTAs, and explore personalization pilots.
 
 ### Workstream Tracker
-Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regularly. Add additional rows per phase task.
+Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regularly. Add additional rows per phase task. For full milestone → story → task hierarchy, see `docs/roadmap.md`.
 
 | ID | Phase | Task | Deliverables | Owner | Status | Due | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
