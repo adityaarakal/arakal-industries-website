@@ -1,5 +1,10 @@
 ## Project Plan & Tracker
 
+### Current Focus
+- **Phase:** M4 – Engineering & Integration kickoff
+- **Active Stories:** S10 (Foundation Setup), S11 (Page & Component Development)
+- **Objectives this cycle:** Scaffold Next.js 15 project with Tailwind/Radix, configure CI/CD, and ship baseline layout (header/footer/home shell) to staging.
+
 ### Phase Overview
 1. **Discovery & Strategy (Week 1-2)**
    - Conduct stakeholder interviews, gather brand assets, validate production stats (capacity, certifications), and finalize KPI targets.
@@ -31,7 +36,7 @@ Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regular
 
 | ID | Phase | Task | Deliverables | Owner | Status | Due | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| D1 | Discovery | Stakeholder workshop | Interview notes, KPI brief |  | Not Started |  |  |
+| D1 | Discovery | Stakeholder workshop | Interview notes, KPI brief |  | In Progress |  | See `docs/discovery/stakeholder-interviews.md` for plan (running in parallel) |
 | D2 | Discovery | Competitive & SEO audit | SWOT matrix, keyword list |  | Not Started |  |  |
 | D3 | Discovery | Sitemap & content model | IA diagram, CMS schema draft |  | Not Started |  |  |
 | D4 | Discovery | Directory & listing audit | Consolidated fact sheet (contacts, addresses, categories) |  | Not Started |  | Requires alignment across Justdial/IndiaMART/Mappls |
@@ -43,11 +48,11 @@ Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regular
 | C2 | Content | Produce media assets | Photo/video package, edited |  | Not Started |  | Capture both facilities & manufacturing lines |
 | C3 | Content | Testimonial & case study curation | Approved quotes, success stories, review excerpts |  | Not Started |  | Source from Justdial/IndiaMART with consent |
 | C4 | Content | Compliance & fact verification pass | Sign-off log, updated fact sheet |  | Not Started |  | Coordinate with operations/legal |
-| E1 | Engineering | Initialize repo & CI | Repo, env config, lint/test setup |  | Not Started |  |  |
-| E2 | Engineering | Implement frontend | Responsive components, routing |  | Not Started |  | Include Mappls map components and fallback map |
-| E3 | Engineering | Integrate CMS & data | Sanity schemas, ISR workflows |  | Not Started |  | Model products, locations, heritage timeline |
-| E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Not Started |  | CRM sync with referral tagging & directory integration |
-| E5 | Engineering | Analytics & consent setup | GTM containers, consent manager, Hotjar config |  | Not Started |  | Validate event naming with data team |
+| E1 | Engineering | Initialize repo & CI | Repo, env config, lint/test setup |  | In Progress |  | Sprint goal: Next.js 15 + Tailwind/Radix scaffold, Storybook, GitHub Actions |
+| E2 | Engineering | Implement frontend | Responsive components, routing |  | Planned |  | Next: Base layout, navigation, footer, home shell |
+| E3 | Engineering | Integrate CMS & data | Sanity schemas, ISR workflows |  | Planned |  | Model products, locations, heritage timeline |
+| E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Planned |  | CRM sync with referral tagging & directory integration |
+| E5 | Engineering | Analytics & consent setup | GTM containers, consent manager, Hotjar config |  | Planned |  | Validate event naming with data team |
 | Q1 | QA & Launch | Comprehensive testing | Test reports, bug fixes, sign-off |  | Not Started |  |  |
 | Q2 | QA & Launch | Launch readiness | Checklist, DNS plan, comms draft |  | Not Started |  |  |
 | G1 | Growth | Analytics review cadence | Monthly dashboards, insights |  | Not Started |  |  |
