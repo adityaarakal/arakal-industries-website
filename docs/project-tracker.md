@@ -2,17 +2,17 @@
 
 ### Phase Overview
 1. **Discovery & Strategy (Week 1-2)**
-   - Conduct stakeholder interviews, gather brand assets, finalize KPI targets.
-   - Perform competitive analysis and SEO keyword research.
-   - Define content architecture, sitemap, and storytelling pillars.
+   - Conduct stakeholder interviews, gather brand assets, validate production stats (capacity, certifications), and finalize KPI targets.
+   - Perform competitive analysis, SEO keyword research, and audit existing digital listings (Justdial, IndiaMART, Handlooms, Tata nexarc, Mappls, LinkedIn) for consistency gaps.
+   - Define content architecture, sitemap, and storytelling pillars anchored in verified heritage and facility data.
 2. **Experience & Visual Design (Week 3-5)**
-   - Develop UX wireframes for key pages (homepage, catalogue, industry, contact).
-   - Create UI design system, mood boards, and responsive comps in Figma.
-   - Validate designs with stakeholders; iterate based on feedback.
+   - Compile mood boards and style tiles to lock visual direction (color, typography, imagery, iconography).
+   - Develop responsive wireframes for key pages (homepage, catalogue, industry, manufacturing, locations, resources, contact).
+   - Produce high-fidelity UI screens, component library, interaction states, and annotations in Figma; validate with stakeholders and iterate.
 3. **Content Production (Week 4-6)**
-   - Draft copy for all pages, product specs, CTAs, and resource assets.
-   - Coordinate photography/videography, edit assets, prepare downloadable brochures.
-   - Load structured content into Sanity CMS with review workflow.
+   - Draft copy for all pages, product specs, CTAs, and resource assets leveraging validated facts and testimonials.
+   - Coordinate photography/videography, edit assets, prepare downloadable brochures, and capture facility/location imagery (Gandhi Nagar & MIDC).
+   - Load structured content into Sanity CMS with review workflow including compliance and data verification checkpoints.
 4. **Engineering & Integration (Week 5-8)**
    - Set up repository, CI/CD, environments, and base Next.js project.
    - Implement responsive layouts, component library, and CMS integration.
@@ -34,14 +34,20 @@ Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regular
 | D1 | Discovery | Stakeholder workshop | Interview notes, KPI brief |  | Not Started |  |  |
 | D2 | Discovery | Competitive & SEO audit | SWOT matrix, keyword list |  | Not Started |  |  |
 | D3 | Discovery | Sitemap & content model | IA diagram, CMS schema draft |  | Not Started |  |  |
-| X1 | Design | Wireframe key pages | Low/high fidelity wireframes |  | Not Started |  |  |
-| X2 | Design | Build design system | Component library in Figma |  | Not Started |  |  |
-| C1 | Content | Draft page copy | Copy deck per page |  | Not Started |  |  |
-| C2 | Content | Produce media assets | Photo/video package, edited |  | Not Started |  |  |
+| D4 | Discovery | Directory & listing audit | Consolidated fact sheet (contacts, addresses, categories) |  | Not Started |  | Requires alignment across Justdial/IndiaMART/Mappls |
+| X1 | Design | Mood board & style tiles | Visual direction deck, design principles |  | Not Started |  | Share for stakeholder sign-off |
+| X2 | Design | Wireframe key pages | Low/high fidelity wireframes |  | Not Started |  | Include Locations & Heritage pages |
+| X3 | Design | High-fidelity UI & components | Figma UI kit, component library |  | Not Started |  | Sync tokens with Tailwind/Radix |
+| X4 | Design | Design QA & handoff | Annotated specs, asset exports, change log |  | Not Started |  | Pair with engineering for build readiness |
+| C1 | Content | Draft page copy | Copy deck per page |  | Not Started |  | Incorporate validated production stats |
+| C2 | Content | Produce media assets | Photo/video package, edited |  | Not Started |  | Capture both facilities & manufacturing lines |
+| C3 | Content | Testimonial & case study curation | Approved quotes, success stories, review excerpts |  | Not Started |  | Source from Justdial/IndiaMART with consent |
+| C4 | Content | Compliance & fact verification pass | Sign-off log, updated fact sheet |  | Not Started |  | Coordinate with operations/legal |
 | E1 | Engineering | Initialize repo & CI | Repo, env config, lint/test setup |  | Not Started |  |  |
-| E2 | Engineering | Implement frontend | Responsive components, routing |  | Not Started |  |  |
-| E3 | Engineering | Integrate CMS & data | Sanity schemas, ISR workflows |  | Not Started |  |  |
-| E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Not Started |  |  |
+| E2 | Engineering | Implement frontend | Responsive components, routing |  | Not Started |  | Include Mappls map components and fallback map |
+| E3 | Engineering | Integrate CMS & data | Sanity schemas, ISR workflows |  | Not Started |  | Model products, locations, heritage timeline |
+| E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Not Started |  | CRM sync with referral tagging & directory integration |
+| E5 | Engineering | Analytics & consent setup | GTM containers, consent manager, Hotjar config |  | Not Started |  | Validate event naming with data team |
 | Q1 | QA & Launch | Comprehensive testing | Test reports, bug fixes, sign-off |  | Not Started |  |  |
 | Q2 | QA & Launch | Launch readiness | Checklist, DNS plan, comms draft |  | Not Started |  |  |
 | G1 | Growth | Analytics review cadence | Monthly dashboards, insights |  | Not Started |  |  |
