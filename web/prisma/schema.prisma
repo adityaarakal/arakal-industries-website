@@ -1,0 +1,68 @@
+// Prisma schema for Arakal Industries website
+// Database: PostgreSQL (Neon)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Lead/Contact submissions from website forms
+model Lead {
+  id        String   @id @default(cuid())
+  email     String
+  name      String?
+  company   String?
+  phone     String?
+  message   String?  @db.Text
+  source    String?  // web, indiamart, justdial, etc.
+  referrer  String?  // URL that referred the lead
+  metadata  Json?    // Additional data (product interests, volume, etc.)
+  status    String   @default("new") // new, contacted, qualified, converted, archived
+  hubspotId String?  // HubSpot contact ID after sync
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@index([createdAt])
+  @@map("leads")
+}
+
+// Newsletter subscriptions
+model NewsletterSubscription {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  status    String   @default("active") // active, unsubscribed, bounced
+  source    String?  // Where they subscribed from
+  metadata  Json?    // Additional subscription data
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+  @@map("newsletter_subscriptions")
+}
+
+// Analytics events (optional, for custom event tracking)
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  eventName String
+  eventData Json?
+  userId    String?  // Anonymous user ID
+  sessionId String?
+  page      String?
+  referrer  String?
+  userAgent String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([eventName])
+  @@index([createdAt])
+  @@index([userId])
+  @@map("analytics_events")
+}
+

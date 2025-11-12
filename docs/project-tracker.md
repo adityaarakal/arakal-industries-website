@@ -48,7 +48,7 @@ Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regular
 | C2 | Content | Produce media assets | Photo/video package, edited |  | Not Started |  | Capture both facilities & manufacturing lines |
 | C3 | Content | Testimonial & case study curation | Approved quotes, success stories, review excerpts |  | Not Started |  | Source from Justdial/IndiaMART with consent |
 | C4 | Content | Compliance & fact verification pass | Sign-off log, updated fact sheet |  | Not Started |  | Coordinate with operations/legal |
-| E1 | Engineering | Initialize repo & CI | Repo, env config, lint/test setup |  | In Progress |  | Sprint goal: Next.js 15 + Tailwind/Radix scaffold, Storybook, GitHub Actions |
+| E1 | Engineering | Initialize repo & CI | Repo, env config, lint/test setup |  | Completed |  | Next.js 15 scaffold, Tailwind CSS, Radix UI, Prisma, GitHub Actions CI/CD, testing setup (Vitest, Playwright), Storybook configured |
 | E2 | Engineering | Implement frontend | Responsive components, routing |  | Planned |  | Next: Base layout, navigation, footer, home shell |
 | E3 | Engineering | Integrate CMS & data | Sanity schemas, ISR workflows |  | Planned |  | Model products, locations, heritage timeline |
 | E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Planned |  | CRM sync with referral tagging & directory integration |

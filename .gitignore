@@ -1,0 +1,50 @@
+# Root level gitignore for Arakal Industries Website
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.code-workspace
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+.cache/
+.temp/
+tmp/
+temp/
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env*.local
+.env.local
+
+# Documentation build (if any)
+docs/_build/
+docs/.vuepress/dist/
+docs/.docusaurus/
+
+# Misc
+*.pem
+*.key
+*.cert
+
