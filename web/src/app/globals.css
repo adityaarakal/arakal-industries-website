@@ -21,6 +21,8 @@
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #171717;
 
   /* Typography */
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
