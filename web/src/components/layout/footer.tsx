@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { COMPANY_INFO, NAVIGATION, SOCIAL_LINKS } from "@/lib/constants";
 import { Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { NewsletterForm } from "@/components/forms/newsletter-form";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -68,6 +69,14 @@ export function Footer() {
                   {COMPANY_INFO.contact.email}
                 </a>
               </div>
+            </div>
+            {/* Newsletter Subscription */}
+            <div className="mt-6">
+              <h4 className="text-sm font-semibold mb-2">Newsletter</h4>
+              <p className="text-xs text-muted-foreground mb-3">
+                Stay updated with our latest products and news.
+              </p>
+              <NewsletterForm source="footer" />
             </div>
           </div>
 

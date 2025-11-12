@@ -7,6 +7,7 @@ import { GoogleTagManager } from "@/components/analytics/google-tag-manager";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { Hotjar } from "@/components/analytics/hotjar";
 import { ConsentManager } from "@/components/analytics/consent-manager";
+import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { generateOrganizationSchema } from "@/lib/seo";
 import "./globals.css";
 
@@ -126,6 +127,10 @@ export default function RootLayout({
         {hotjarId && <Hotjar hotjarId={hotjarId} />}
         {/* Consent Manager */}
         <ConsentManager />
+        {/* WhatsApp Floating Button */}
+        {COMPANY_INFO.contact.whatsapp && (
+          <WhatsAppButton variant="floating" />
+        )}
       </body>
     </html>
   );

@@ -12,6 +12,7 @@ export const productsQuery = groq`*[_type == "product"] | order(_createdAt desc)
   colors,
   images,
   specifications,
+  features,
   featured,
   _createdAt,
   _updatedAt
@@ -28,6 +29,7 @@ export const productBySlugQuery = groq`*[_type == "product" && slug.current == $
   colors,
   images,
   specifications,
+  features,
   featured,
   _createdAt,
   _updatedAt
@@ -44,6 +46,7 @@ export const featuredProductsQuery = groq`*[_type == "product" && featured == tr
   colors,
   images,
   specifications,
+  features,
   featured,
   _createdAt,
   _updatedAt

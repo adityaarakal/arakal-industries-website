@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { RFQForm } from "@/components/forms/rfq-form";
+import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { Mail, Phone, MapPin, MessageSquare } from "lucide-react";
 
