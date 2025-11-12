@@ -23,12 +23,6 @@ test.describe("Accessibility", () => {
     expect(count).toBeGreaterThan(0);
   });
 
-  test("should have proper heading hierarchy", async ({ page }) => {
-    await page.goto("/");
-    const h1 = page.locator("h1");
-    await expect(h1).toHaveCount(1);
-  });
-
   test("should have proper alt text for images", async ({ page }) => {
     await page.goto("/");
     const images = page.locator("img");

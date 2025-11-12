@@ -6,6 +6,8 @@ import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { MapPin, Phone, Mail, Factory, ArrowRight } from "lucide-react";
 import { getLocations } from "@/lib/sanity/fetch";
 import { urlForImage } from "@/lib/sanity/image";
+import { generateLocalBusinessSchema, generateWebSiteSchema } from "@/lib/seo";
+import { JSONLD } from "@/components/seo/json-ld";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -43,6 +45,15 @@ export default async function LocationsPage() {
 
   return (
     <>
+      {/* Structured Data - LocalBusiness Schema for each location */}
+      {COMPANY_INFO.locations.map((location, index) => (
+        <JSONLD
+          key={`location-schema-${index}`}
+          data={generateLocalBusinessSchema(location)}
+        />
+      ))}
+      {/* Structured Data - WebSite Schema */}
+      <JSONLD data={generateWebSiteSchema()} />
       {/* Hero Section */}
       <section className="py-20 bg-muted/50">
         <Container>

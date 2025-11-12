@@ -6,6 +6,8 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { Package, ArrowRight } from "lucide-react";
 import { getProducts } from "@/lib/sanity/fetch";
 import { urlForImage } from "@/lib/sanity/image";
+import { generateProductSchema, generateWebSiteSchema } from "@/lib/seo";
+import { JSONLD } from "@/components/seo/json-ld";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -60,6 +62,20 @@ export default async function ProductsPage() {
 
   return (
     <>
+      {/* Structured Data - Product Schema for each product */}
+      {displayProducts.map((product) => (
+        <JSONLD
+          key={`product-schema-${product._id}`}
+          data={generateProductSchema({
+            name: product.name,
+            description: product.description,
+            category: product.category,
+            sku: product.slug?.current || product.category,
+          })}
+        />
+      ))}
+      {/* Structured Data - WebSite Schema */}
+      <JSONLD data={generateWebSiteSchema()} />
       {/* Hero Section */}
       <section className="py-20 bg-muted/50">
         <Container>

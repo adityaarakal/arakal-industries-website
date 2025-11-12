@@ -7,6 +7,7 @@ import { GoogleTagManager } from "@/components/analytics/google-tag-manager";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { Hotjar } from "@/components/analytics/hotjar";
 import { ConsentManager } from "@/components/analytics/consent-manager";
+import { generateOrganizationSchema } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -106,6 +107,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        {/* Structured Data - Organization Schema */}
+        <JSONLD data={generateOrganizationSchema()} />
         {/* Google Tag Manager - Load early */}
         {gtmId && <GoogleTagManager gtmId={gtmId} />}
       </head>
