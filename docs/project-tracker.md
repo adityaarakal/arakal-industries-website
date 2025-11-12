@@ -54,7 +54,7 @@ Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regular
 | E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Completed |  | Multi-step RFQ form with React Hook Form & Zod validation, PostgreSQL storage, HubSpot CRM integration, Resend email notifications, GA4 event tracking |
 | E5 | Engineering | Analytics & consent setup | GTM containers, consent manager, Hotjar config |  | Completed |  | Google Tag Manager integration, Google Analytics 4 with consent-aware loading, custom consent manager (GDPR compliant), Hotjar integration with consent-aware loading, analytics utilities with consent checking |
 | Q1 | QA & Launch | Comprehensive testing | Test reports, bug fixes, sign-off |  | Completed |  | Unit tests (Button, Input, Header, Footer, Consent, Analytics, Validation), E2E tests (Homepage, RFQ Form, Consent Manager, Accessibility), Lighthouse CI configured, CI/CD updated with E2E tests, Testing documentation created. Tests ready to run once dependencies are installed. |
-| Q2 | QA & Launch | Launch readiness | Checklist, DNS plan, comms draft |  | Not Started |  |  |
+| Q2 | QA & Launch | Launch readiness | Checklist, DNS plan, comms draft |  | In Progress |  | Launch checklist created (DNS, SSL, redirects, backup plan). SEO enhancements completed: Schema markup (Organization, LocalBusiness, Product, WebSite), sitemap.ts and robots.ts configured. Fixed duplicate test in accessibility.spec.ts. JSON-LD component created for structured data. |
 | G1 | Growth | Analytics review cadence | Monthly dashboards, insights |  | Not Started |  |  |
 | G2 | Growth | Optimization backlog | Prioritized roadmap |  | Not Started |  |  |
 
