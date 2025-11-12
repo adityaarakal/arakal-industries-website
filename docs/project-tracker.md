@@ -52,7 +52,7 @@ Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regular
 | E2 | Engineering | Implement frontend | Responsive components, routing |  | Completed |  | All page templates created: Products, Industries, Manufacturing, Sustainability, About, Resources, Locations, Contact. Header, Footer, Homepage completed. All pages have SEO metadata and responsive layouts. |
 | E3 | Engineering | Integrate CMS & data | Sanity schemas, ISR workflows |  | Completed |  | Sanity CMS setup complete: schemas for products, locations, heritage timeline, testimonials, industries, resources, pages, settings. ISR configured (3600s revalidation). Products, About, Locations pages integrated with Sanity. Sanity Studio at /studio |
 | E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Completed |  | Multi-step RFQ form with React Hook Form & Zod validation, PostgreSQL storage, HubSpot CRM integration, Resend email notifications, GA4 event tracking |
-| E5 | Engineering | Analytics & consent setup | GTM containers, consent manager, Hotjar config |  | Planned |  | Validate event naming with data team |
+| E5 | Engineering | Analytics & consent setup | GTM containers, consent manager, Hotjar config |  | Completed |  | Google Tag Manager integration, Google Analytics 4 with consent-aware loading, custom consent manager (GDPR compliant), Hotjar integration with consent-aware loading, analytics utilities with consent checking |
 | Q1 | QA & Launch | Comprehensive testing | Test reports, bug fixes, sign-off |  | Not Started |  |  |
 | Q2 | QA & Launch | Launch readiness | Checklist, DNS plan, comms draft |  | Not Started |  |  |
 | G1 | Growth | Analytics review cadence | Monthly dashboards, insights |  | Not Started |  |  |

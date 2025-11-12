@@ -132,7 +132,11 @@ See `.env.example` for all required environment variables. Key variables include
 - `SANITY_API_WRITE_TOKEN` - Sanity API write token
 - `HUBSPOT_API_KEY` - HubSpot API key
 - `RESEND_API_KEY` - Resend API key
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID` - Google Analytics ID
+- `RESEND_FROM_EMAIL` - Resend from email address (optional, defaults to noreply@arakalindustries.com)
+- `RESEND_TO_EMAIL` - Resend to email address for notifications (optional, defaults to company contact email)
+- `NEXT_PUBLIC_GTM_ID` - Google Tag Manager container ID (e.g., GTM-XXXXXXX)
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` - Google Analytics 4 measurement ID (e.g., G-XXXXXXXXXX)
+- `NEXT_PUBLIC_HOTJAR_ID` - Hotjar site ID (optional, for session replay and heatmaps)
 - `NEXT_PUBLIC_MAPPLS_API_KEY` - Mappls API key
 
 ## Sanity CMS

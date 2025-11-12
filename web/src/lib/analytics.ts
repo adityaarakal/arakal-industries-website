@@ -3,6 +3,8 @@
  * Supports Google Analytics 4 (GA4) and Google Tag Manager (GTM)
  */
 
+import { hasAnalyticsConsent } from "./consent";
+
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
@@ -12,6 +14,7 @@ declare global {
 
 /**
  * Track a custom event in Google Analytics 4
+ * Only tracks if analytics consent is given
  */
 export function trackEvent(
   eventName: string,
@@ -22,6 +25,11 @@ export function trackEvent(
     [key: string]: unknown;
   }
 ) {
+  // Check for analytics consent
+  if (!hasAnalyticsConsent()) {
+    return;
+  }
+
   if (typeof window !== "undefined" && window.gtag) {
     window.gtag("event", eventName, eventParams);
   }
