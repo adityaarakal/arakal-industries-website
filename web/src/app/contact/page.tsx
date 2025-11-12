@@ -35,7 +35,7 @@ export default function ContactPage() {
       {/* Contact Information */}
       <section className="py-20">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             <div className="bg-card border rounded-lg p-6 text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
                 <Phone className="h-8 w-8" />
@@ -62,10 +62,20 @@ export default function ContactPage() {
             </div>
             <div className="bg-card border rounded-lg p-6 text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
+                <MessageSquare className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">WhatsApp</h3>
+              <div className="space-y-2">
+                <p className="text-muted-foreground text-sm">{COMPANY_INFO.contact.whatsapp}</p>
+                <WhatsAppButton variant="inline" label="Chat on WhatsApp" />
+              </div>
+            </div>
+            <div className="bg-card border rounded-lg p-6 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
                 <MapPin className="h-8 w-8" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Address</h3>
-              <p className="text-muted-foreground">{COMPANY_INFO.locations[0].address}</p>
+              <p className="text-muted-foreground text-sm">{COMPANY_INFO.locations[0].address}</p>
             </div>
           </div>
 
