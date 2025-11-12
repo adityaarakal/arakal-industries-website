@@ -3,8 +3,15 @@ import { prisma } from "@/lib/db/client";
 import { leadFormSchema } from "@/lib/validations/lead";
 import { Resend } from "resend";
 import { COMPANY_INFO } from "@/lib/constants";
+import { rateLimit } from "@/lib/rate-limit";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Rate limit configuration for leads endpoint
+const leadsRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  maxRequests: 5, // 5 requests per 15 minutes per IP
+});
 
 // HubSpot API configuration
 const HUBSPOT_API_KEY = process.env.HUBSPOT_API_KEY;
@@ -227,6 +234,30 @@ async function sendEmailNotification(leadData: {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check rate limit
+    const rateLimitResult = leadsRateLimit(request);
+    if (rateLimitResult) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: rateLimitResult.message,
+          error: rateLimitResult.error,
+          remaining: rateLimitResult.remaining,
+          resetAt: rateLimitResult.resetAt,
+        },
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Remaining": rateLimitResult.remaining.toString(),
+            "X-RateLimit-Reset": rateLimitResult.resetAt,
+            "Retry-After": Math.ceil(
+              (new Date(rateLimitResult.resetAt).getTime() - Date.now()) / 1000
+            ).toString(),
+          },
+        }
+      );
+    }
+
     const body = await request.json();
     const validatedData = leadFormSchema.parse(body);
 

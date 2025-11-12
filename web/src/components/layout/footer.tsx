@@ -128,6 +128,16 @@ export function Footer() {
               {COMPANY_INFO.production.products.join(", ")}
             </p>
           </div>
+
+          {/* Legal Links */}
+          <div className="mt-6 pt-6 border-t flex flex-wrap justify-center gap-4 text-xs text-muted-foreground">
+            <Link href="/privacy" className="hover:text-primary transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-primary transition-colors">
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

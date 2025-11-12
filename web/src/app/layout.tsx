@@ -108,7 +108,12 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         {/* Structured Data - Organization Schema */}
-        <JSONLD data={generateOrganizationSchema()} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(generateOrganizationSchema()),
+          }}
+        />
         {/* Google Tag Manager - Load early */}
         {gtmId && <GoogleTagManager gtmId={gtmId} />}
       </head>
