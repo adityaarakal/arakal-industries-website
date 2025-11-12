@@ -51,7 +51,7 @@ Use the table below to manage tasks. Update `Status`, `Owner`, and `Due` regular
 | E1 | Engineering | Initialize repo & CI | Repo, env config, lint/test setup |  | Completed |  | Next.js 15 scaffold, Tailwind CSS, Radix UI, Prisma, GitHub Actions CI/CD, testing setup (Vitest, Playwright), Storybook configured |
 | E2 | Engineering | Implement frontend | Responsive components, routing |  | Completed |  | All page templates created: Products, Industries, Manufacturing, Sustainability, About, Resources, Locations, Contact. Header, Footer, Homepage completed. All pages have SEO metadata and responsive layouts. |
 | E3 | Engineering | Integrate CMS & data | Sanity schemas, ISR workflows |  | Completed |  | Sanity CMS setup complete: schemas for products, locations, heritage timeline, testimonials, industries, resources, pages, settings. ISR configured (3600s revalidation). Products, About, Locations pages integrated with Sanity. Sanity Studio at /studio |
-| E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Planned |  | CRM sync with referral tagging & directory integration |
+| E4 | Engineering | Lead capture workflow | GA4 events, serverless endpoints |  | Completed |  | Multi-step RFQ form with React Hook Form & Zod validation, PostgreSQL storage, HubSpot CRM integration, Resend email notifications, GA4 event tracking |
 | E5 | Engineering | Analytics & consent setup | GTM containers, consent manager, Hotjar config |  | Planned |  | Validate event naming with data team |
 | Q1 | QA & Launch | Comprehensive testing | Test reports, bug fixes, sign-off |  | Not Started |  |  |
 | Q2 | QA & Launch | Launch readiness | Checklist, DNS plan, comms draft |  | Not Started |  |  |

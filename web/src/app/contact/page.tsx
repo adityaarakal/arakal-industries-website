@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { RFQForm } from "@/components/forms/rfq-form";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
-import { Mail, Phone, MapPin, MessageSquare, Send } from "lucide-react";
+import { Mail, Phone, MapPin, MessageSquare } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -67,82 +68,15 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Contact Form Section */}
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-card border rounded-lg p-8">
-              <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      placeholder="Your Name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="+91-XXX-XXX-XXXX"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Your Company"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={6}
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                    placeholder="Tell us about your requirements..."
-                  />
-                </div>
-                <Button type="submit" size="lg" className="w-full group">
-                  Send Message
-                  <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </form>
+          {/* RFQ Form Section */}
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4">Request a Quote</h2>
+              <p className="text-lg text-muted-foreground">
+                Fill out the form below and we'll get back to you with a custom quote
+              </p>
             </div>
+            <RFQForm source="web" />
           </div>
         </Container>
       </section>
