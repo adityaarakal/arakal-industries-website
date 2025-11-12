@@ -4,6 +4,9 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { MapPin, Phone, Mail, Factory, ArrowRight } from "lucide-react";
+import { getLocations } from "@/lib/sanity/fetch";
+import { urlForImage } from "@/lib/sanity/image";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Locations",
@@ -15,7 +18,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LocationsPage() {
+// Enable ISR (Incremental Static Regeneration)
+export const revalidate = 3600; // Revalidate every hour
+
+export default async function LocationsPage() {
+  // Fetch locations from Sanity CMS
+  const locations = await getLocations().catch(() => []);
+
+  // Fallback locations if CMS is not available
+  const fallbackLocations = COMPANY_INFO.locations.map((loc, index) => ({
+    _id: `location-${index}`,
+    name: loc.name,
+    address: loc.address,
+    coordinates: loc.coordinates,
+    mapplsPin: loc.mapplsPin,
+    digipin: loc.digipin,
+    phone: COMPANY_INFO.contact.phone,
+    email: COMPANY_INFO.contact.email,
+    description: `Manufacturing facility in ${loc.name}`,
+    images: [],
+  }));
+
+  const displayLocations = locations.length > 0 ? locations : fallbackLocations;
+
   return (
     <>
       {/* Hero Section */}
@@ -35,91 +60,112 @@ export default function LocationsPage() {
       <section className="py-20">
         <Container>
           <div className="space-y-12">
-            {COMPANY_INFO.locations.map((location, index) => (
-              <div
-                key={index}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-card border rounded-lg p-8"
-              >
-                <div>
-                  <div className="flex items-center mb-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mr-4">
-                      <Factory className="h-6 w-6" />
+            {displayLocations.map((location, index) => {
+              const imageUrl = location.images?.[0] ? urlForImage(location.images[0]) : null;
+              return (
+                <div
+                  key={location._id || index}
+                  className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-card border rounded-lg p-8"
+                >
+                  <div>
+                    {imageUrl && (
+                      <div className="relative w-full h-64 mb-6 rounded-lg overflow-hidden">
+                        <Image
+                          src={imageUrl}
+                          alt={location.images[0]?.alt || location.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex items-center mb-4">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary mr-4">
+                        <Factory className="h-6 w-6" />
+                      </div>
+                      <h2 className="text-2xl font-bold">{location.name}</h2>
                     </div>
-                    <h2 className="text-2xl font-bold">{location.name}</h2>
+                    <div className="space-y-4">
+                      <div className="flex items-start">
+                        <MapPin className="h-5 w-5 text-muted-foreground mr-3 mt-1" />
+                        <p className="text-muted-foreground">{location.address}</p>
+                      </div>
+                      {location.phone && (
+                        <div className="flex items-center">
+                          <Phone className="h-5 w-5 text-muted-foreground mr-3" />
+                          <a
+                            href={`tel:${location.phone}`}
+                            className="text-muted-foreground hover:text-primary transition-colors"
+                          >
+                            {location.phone}
+                          </a>
+                        </div>
+                      )}
+                      {location.email && (
+                        <div className="flex items-center">
+                          <Mail className="h-5 w-5 text-muted-foreground mr-3" />
+                          <a
+                            href={`mailto:${location.email}`}
+                            className="text-muted-foreground hover:text-primary transition-colors"
+                          >
+                            {location.email}
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                    <div className="mt-6">
+                      {location.mapplsPin && (
+                        <p className="text-sm text-muted-foreground mb-2">
+                          Mappls Pin: {location.mapplsPin}
+                        </p>
+                      )}
+                      {location.digipin && (
+                        <p className="text-sm text-muted-foreground">
+                          Digipin: {location.digipin}
+                        </p>
+                      )}
+                    </div>
+                    {/* Map placeholder - will be replaced with Mappls integration */}
+                    <div className="mt-6">
+                      <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
+                        <p className="text-muted-foreground">
+                          Map integration coming soon (Mappls JS SDK)
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="space-y-4">
-                    <div className="flex items-start">
-                      <MapPin className="h-5 w-5 text-muted-foreground mr-3 mt-1" />
-                      <p className="text-muted-foreground">{location.address}</p>
-                    </div>
-                    <div className="flex items-center">
-                      <Phone className="h-5 w-5 text-muted-foreground mr-3" />
-                      <a
-                        href={`tel:${COMPANY_INFO.contact.phone}`}
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {COMPANY_INFO.contact.phone}
-                      </a>
-                    </div>
-                    <div className="flex items-center">
-                      <Mail className="h-5 w-5 text-muted-foreground mr-3" />
-                      <a
-                        href={`mailto:${COMPANY_INFO.contact.email}`}
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {COMPANY_INFO.contact.email}
-                      </a>
-                    </div>
-                  </div>
-                  <div className="mt-6">
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Mappls Pin: {location.mapplsPin}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Digipin: {location.digipin}
-                    </p>
-                  </div>
-                  {/* Map placeholder - will be replaced with Mappls integration */}
-                  <div className="mt-6">
-                    <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
-                      <p className="text-muted-foreground">
-                        Map integration coming soon (Mappls JS SDK)
-                      </p>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-4">Facility Details</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold mb-2">Production Capacity</h4>
+                        <p className="text-muted-foreground">
+                          Part of our {COMPANY_INFO.production.capacity} annual production capacity
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Products Manufactured</h4>
+                        <ul className="space-y-1">
+                          {COMPANY_INFO.production.products.map((product) => (
+                            <li key={product} className="text-muted-foreground">
+                              • {product}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Location Advantages</h4>
+                        <ul className="space-y-1 text-muted-foreground">
+                          <li>• Strategic location in Solapur</li>
+                          <li>• Easy access to transportation networks</li>
+                          <li>• Close to raw material sources</li>
+                          <li>• Skilled local workforce</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">Facility Details</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold mb-2">Production Capacity</h4>
-                      <p className="text-muted-foreground">
-                        Part of our {COMPANY_INFO.production.capacity} annual production capacity
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Products Manufactured</h4>
-                      <ul className="space-y-1">
-                        {COMPANY_INFO.production.products.map((product) => (
-                          <li key={product} className="text-muted-foreground">
-                            • {product}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Location Advantages</h4>
-                      <ul className="space-y-1 text-muted-foreground">
-                        <li>• Strategic location in Solapur</li>
-                        <li>• Easy access to transportation networks</li>
-                        <li>• Close to raw material sources</li>
-                        <li>• Skilled local workforce</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -145,4 +191,3 @@ export default function LocationsPage() {
     </>
   );
 }
-

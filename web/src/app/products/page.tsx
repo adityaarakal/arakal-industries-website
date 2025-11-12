@@ -2,8 +2,11 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
-import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
+import { SITE_CONFIG } from "@/lib/constants";
 import { Package, ArrowRight } from "lucide-react";
+import { getProducts } from "@/lib/sanity/fetch";
+import { urlForImage } from "@/lib/sanity/image";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -15,27 +18,45 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProductsPage() {
-  const products = [
+// Enable ISR (Incremental Static Regeneration)
+export const revalidate = 3600; // Revalidate every hour
+
+export default async function ProductsPage() {
+  // Fetch products from Sanity CMS
+  const products = await getProducts().catch(() => []);
+
+  // Fallback products if CMS is not available
+  const fallbackProducts = [
     {
+      _id: "1",
       name: "Terry Towels",
+      slug: { current: "terry-towels" },
       description: "High-quality terry towels with excellent absorbency and durability. Perfect for hospitality, healthcare, and home use.",
       category: "terry",
       features: ["High GSM", "Excellent Absorbency", "Durable", "Soft Texture"],
+      images: [],
     },
     {
+      _id: "2",
       name: "Dobby Towels",
+      slug: { current: "dobby-towels" },
       description: "Premium dobby towels with intricate patterns and designs. Ideal for luxury hospitality and retail markets.",
       category: "dobby",
       features: ["Intricate Patterns", "Luxury Finish", "Custom Designs", "Premium Quality"],
+      images: [],
     },
     {
+      _id: "3",
       name: "Jacquard Chaddars",
+      slug: { current: "jacquard-chaddars" },
       description: "Traditional jacquard chaddars with heritage designs. Crafted with precision and attention to detail.",
       category: "jacquard",
       features: ["Heritage Designs", "Traditional Craftsmanship", "Premium Materials", "Cultural Authenticity"],
+      images: [],
     },
   ];
+
+  const displayProducts = products.length > 0 ? products : fallbackProducts;
 
   return (
     <>
@@ -56,32 +77,47 @@ export default function ProductsPage() {
       <section className="py-20">
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
-              <div
-                key={product.category}
-                className="bg-card border rounded-lg p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
-                  <Package className="h-8 w-8" />
+            {displayProducts.map((product) => {
+              const imageUrl = product.images?.[0] ? urlForImage(product.images[0]) : null;
+              return (
+                <div
+                  key={product._id}
+                  className="bg-card border rounded-lg p-6 hover:shadow-lg transition-shadow"
+                >
+                  {imageUrl && (
+                    <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
+                      <Image
+                        src={imageUrl}
+                        alt={product.images[0]?.alt || product.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
+                    <Package className="h-8 w-8" />
+                  </div>
+                  <h2 className="text-2xl font-bold mb-3">{product.name}</h2>
+                  <p className="text-muted-foreground mb-4">{product.description}</p>
+                  {product.features && (
+                    <ul className="space-y-2 mb-6">
+                      {product.features.map((feature: string, index: number) => (
+                        <li key={index} className="flex items-center text-sm">
+                          <span className="w-2 h-2 bg-primary rounded-full mr-2" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Button asChild variant="outline" className="w-full group">
+                    <Link href={`/products/${product.slug?.current || product.category}`}>
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
                 </div>
-                <h2 className="text-2xl font-bold mb-3">{product.name}</h2>
-                <p className="text-muted-foreground mb-4">{product.description}</p>
-                <ul className="space-y-2 mb-6">
-                  {product.features.map((feature, index) => (
-                    <li key={index} className="flex items-center text-sm">
-                      <span className="w-2 h-2 bg-primary rounded-full mr-2" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild variant="outline" className="w-full group">
-                  <Link href={`/products/${product.category}`}>
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -106,4 +142,3 @@ export default function ProductsPage() {
     </>
   );
 }
-

@@ -4,6 +4,7 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { Calendar, Factory, Users, Award, ArrowRight } from "lucide-react";
+import { getHeritageTimeline } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -15,29 +16,43 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
-  const heritageTimeline = [
+// Enable ISR (Incremental Static Regeneration)
+export const revalidate = 3600; // Revalidate every hour
+
+export default async function AboutPage() {
+  // Fetch heritage timeline from Sanity CMS
+  const heritageTimelineItems = await getHeritageTimeline().catch(() => []);
+
+  // Fallback heritage timeline if CMS is not available
+  const fallbackTimeline = [
     {
+      _id: "1",
       year: COMPANY_INFO.heritage.handlooms,
       title: "Handloom Roots",
       description: "Arakal family begins handloom operations, laying the foundation for textile manufacturing excellence.",
     },
     {
+      _id: "2",
       year: COMPANY_INFO.heritage.jacquard,
       title: "Jacquard Expansion",
       description: "Expansion into jacquard chaddars, showcasing traditional craftsmanship and design expertise.",
     },
     {
+      _id: "3",
       year: COMPANY_INFO.heritage.terryTowels,
       title: "Terry Towel Production",
       description: "Launch of terry towel production under Arakal Textiles, marking entry into modern textile manufacturing.",
     },
     {
+      _id: "4",
       year: COMPANY_INFO.founded,
       title: "Arakal Industries",
       description: "Formation of Arakal Industries, establishing the company as a leading towel manufacturer in Solapur.",
     },
   ];
+
+  const timeline = heritageTimelineItems.length > 0 ? heritageTimelineItems : fallbackTimeline;
+  const sortedTimeline = [...timeline].sort((a, b) => a.year - b.year);
 
   const values = [
     {
@@ -84,8 +99,8 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold mb-12 text-center">Our Heritage</h2>
             <div className="space-y-8">
-              {heritageTimeline.map((item, index) => (
-                <div key={index} className="relative pl-8 border-l-2 border-primary">
+              {sortedTimeline.map((item, index) => (
+                <div key={item._id || index} className="relative pl-8 border-l-2 border-primary">
                   <div className="absolute -left-3 top-0 w-6 h-6 bg-primary rounded-full border-4 border-background" />
                   <div className="mb-2">
                     <span className="text-2xl font-bold text-primary">{item.year}</span>
@@ -171,4 +186,3 @@ export default function AboutPage() {
     </>
   );
 }
-

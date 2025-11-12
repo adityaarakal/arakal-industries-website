@@ -54,6 +54,8 @@
     "@sanity/client": "^6.20.2",
     "@sanity/image-url": "^1.1.4",
     "next-sanity": "^7.5.0",
+    "sanity": "^3.69.6",
+    "@sanity/vision": "^3.69.6",
     "resend": "^4.0.1",
     "@google-analytics/data": "^4.3.0",
     "posthog-js": "^1.212.0"

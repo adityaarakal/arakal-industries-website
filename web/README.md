@@ -56,7 +56,23 @@ npm run db:push
 npm run db:migrate
 ```
 
-5. Run the development server:
+5. Set up Sanity CMS:
+```bash
+# Install Sanity CLI (if not already installed)
+npm install -g @sanity/cli
+
+# Login to Sanity
+sanity login
+
+# Initialize Sanity project (if not already done)
+sanity init
+
+# Start Sanity Studio
+npm run dev
+# Visit http://localhost:3000/studio to access Sanity Studio
+```
+
+6. Run the development server:
 ```bash
 npm run dev
 ```
@@ -69,13 +85,18 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 web/
 ├── src/
 │   ├── app/              # Next.js App Router pages
+│   │   ├── studio/       # Sanity Studio
+│   │   └── api/          # API routes
 │   ├── components/       # React components
 │   │   ├── ui/          # Reusable UI components (Radix UI)
 │   │   ├── layout/      # Layout components (Header, Footer)
 │   │   └── sections/    # Page sections
 │   ├── lib/             # Utility functions and configurations
+│   │   └── sanity/      # Sanity CMS utilities
+│   ├── cms/             # Sanity CMS schemas
+│   │   └── schemas/     # Content schemas
 │   ├── types/           # TypeScript type definitions
-│   └── cms/             # Sanity CMS configuration
+│   └── test/            # Test setup files
 ├── prisma/              # Prisma schema and migrations
 ├── public/              # Static assets
 └── .github/             # GitHub Actions workflows
@@ -106,10 +127,43 @@ See `.env.example` for all required environment variables. Key variables include
 
 - `DATABASE_URL` - PostgreSQL connection string
 - `NEXT_PUBLIC_SANITY_PROJECT_ID` - Sanity project ID
+- `NEXT_PUBLIC_SANITY_DATASET` - Sanity dataset (default: "production")
+- `SANITY_API_READ_TOKEN` - Sanity API read token
+- `SANITY_API_WRITE_TOKEN` - Sanity API write token
 - `HUBSPOT_API_KEY` - HubSpot API key
 - `RESEND_API_KEY` - Resend API key
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID` - Google Analytics ID
 - `NEXT_PUBLIC_MAPPLS_API_KEY` - Mappls API key
+
+## Sanity CMS
+
+The project uses Sanity.io as the headless CMS. To access Sanity Studio:
+
+1. Visit `/studio` in your browser (e.g., `http://localhost:3000/studio`)
+2. Login with your Sanity credentials
+3. Start creating content!
+
+### Content Schemas
+
+The following content types are available in Sanity:
+
+- **Product** - Product catalog (terry towels, dobby towels, jacquard chaddars)
+- **Location** - Manufacturing facilities (Gandhi Nagar, Solapur MIDC)
+- **Heritage Timeline** - Company history timeline
+- **Testimonial** - Customer testimonials and reviews
+- **Industry** - Industries served (hospitality, healthcare, retail, wellness)
+- **Resource** - Resources (brochures, buyer guides, certifications)
+- **Page** - Custom page content
+- **Settings** - Site settings (contact info, social links)
+
+## ISR (Incremental Static Regeneration)
+
+The site uses ISR for optimal performance:
+
+- Pages are statically generated at build time
+- Pages are revalidated every hour (3600 seconds)
+- Content updates are reflected within the revalidation period
+- Reduces server load while keeping content fresh
 
 ## Deployment
 
