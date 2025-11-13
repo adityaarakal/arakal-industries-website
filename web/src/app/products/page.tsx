@@ -9,6 +9,8 @@ import { urlForImage } from "@/lib/sanity/image";
 import { generateProductSchema, generateWebSiteSchema } from "@/lib/seo";
 import { JSONLD } from "@/components/seo/json-ld";
 import { ProductsFilter } from "@/components/products/products-filter";
+import { ProductSearch } from "@/components/products/product-search";
+import { ProductsList } from "@/components/products/products-list";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -25,12 +27,13 @@ export const metadata: Metadata = {
 export const revalidate = 3600; // Revalidate every hour
 
 interface ProductsPageProps {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; q?: string }>;
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const params = await searchParams;
   const categoryFilter = params.category || "";
+  const searchQuery = params.q || "";
 
   // Fetch products from Sanity CMS
   const products = await getProducts().catch(() => []);
@@ -77,10 +80,23 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const displayProducts = products.length > 0 ? products : fallbackProducts;
 
   // Filter products by category if filter is provided
-  const filteredProducts =
+  let filteredProducts =
     categoryFilter && categoryFilter !== "all"
       ? displayProducts.filter((product) => product.category === categoryFilter)
       : displayProducts;
+
+  // Filter products by search query if provided
+  if (searchQuery) {
+    const query = searchQuery.toLowerCase();
+    filteredProducts = filteredProducts.filter(
+      (product) =>
+        product.name.toLowerCase().includes(query) ||
+        product.description.toLowerCase().includes(query) ||
+        product.category.toLowerCase().includes(query) ||
+        (product.features &&
+          product.features.some((feature: string) => feature.toLowerCase().includes(query)))
+    );
+  }
 
   return (
     <>
@@ -115,64 +131,30 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       {/* Products Grid with Filters */}
       <section className="py-20">
         <Container>
-          {/* Filter Section */}
-          <div className="mb-8">
+          {/* Search and Filter Section */}
+          <div className="mb-8 space-y-4">
+            {/* Search Bar */}
+            <div className="max-w-md">
+              <ProductSearch placeholder="Search products by name, description, or features..." />
+            </div>
+            {/* Filter */}
             <ProductsFilter initialCategory={categoryFilter} />
+            {/* Search Results Info */}
+            {searchQuery && (
+              <div className="text-sm text-muted-foreground">
+                {filteredProducts.length > 0 ? (
+                  <>
+                    Found {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""} for &quot;{searchQuery}&quot;
+                  </>
+                ) : (
+                  <>No products found for &quot;{searchQuery}&quot;</>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Products Grid */}
-          {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product) => {
-                const imageUrl = product.images?.[0] ? urlForImage(product.images[0]) : null;
-                return (
-                  <div
-                    key={product._id}
-                    className="bg-card border rounded-lg p-6 hover:shadow-lg transition-shadow"
-                  >
-                    {imageUrl && (
-                      <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
-                        <Image
-                          src={imageUrl}
-                          alt={product.images[0]?.alt || product.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
-                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
-                      <Package className="h-8 w-8" />
-                    </div>
-                    <h2 className="text-2xl font-bold mb-3">{product.name}</h2>
-                    <p className="text-muted-foreground mb-4">{product.description}</p>
-                    {product.features && (
-                      <ul className="space-y-2 mb-6">
-                        {product.features.map((feature: string, index: number) => (
-                          <li key={index} className="flex items-center text-sm">
-                            <span className="w-2 h-2 bg-primary rounded-full mr-2" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    <Button asChild variant="outline" className="w-full group">
-                      <Link href={`/products/${product.slug?.current || product.category}`}>
-                        Learn More
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground mb-4">No products found in this category.</p>
-              <Button asChild variant="outline">
-                <Link href="/products">Show All Products</Link>
-              </Button>
-            </div>
-          )}
+          <ProductsList products={filteredProducts} />
         </Container>
       </section>
 

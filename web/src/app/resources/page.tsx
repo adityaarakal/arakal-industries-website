@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { GatedDownload } from "@/components/resources/gated-download";
 import { SITE_CONFIG } from "@/lib/constants";
 import { FileText, Download, BookOpen, ArrowRight } from "lucide-react";
 
@@ -81,13 +82,11 @@ export default function ResourcesPage() {
                 </div>
                 <h2 className="text-xl font-bold mb-3">{resource.title}</h2>
                 <p className="text-muted-foreground mb-6">{resource.description}</p>
-                <Button asChild variant="outline" className="group w-full">
-                  <Link href="#">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
+                <GatedDownload
+                  resourceTitle={resource.title}
+                  resourceUrl={`/resources/${resource.title.toLowerCase().replace(/\s+/g, "-")}.pdf`}
+                  resourceType={resource.type}
+                />
               </div>
             ))}
           </div>

@@ -8,7 +8,9 @@ import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { Hotjar } from "@/components/analytics/hotjar";
 import { ConsentManager } from "@/components/analytics/consent-manager";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
+import { ServiceWorkerUnregister } from "@/components/service-worker-unregister";
 import { generateOrganizationSchema } from "@/lib/seo";
+import { COMPANY_INFO } from "@/lib/constants";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -108,6 +110,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <meta name="mobile-web-app-capable" content="yes" />
         {/* Structured Data - Organization Schema */}
         <script
           type="application/ld+json"
@@ -125,6 +128,8 @@ export default function RootLayout({
         {/* Analytics Scripts */}
         {gaMeasurementId && <GoogleAnalytics measurementId={gaMeasurementId} />}
         {hotjarId && <Hotjar hotjarId={hotjarId} />}
+        {/* Service Worker Unregister - Fixes cached service worker issues */}
+        <ServiceWorkerUnregister />
         {/* Consent Manager */}
         <ConsentManager />
         {/* WhatsApp Floating Button */}

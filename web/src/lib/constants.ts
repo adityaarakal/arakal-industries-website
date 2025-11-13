@@ -5,7 +5,7 @@
 export const SITE_CONFIG = {
   name: "Arakal Industries",
   description: "Premium towel manufacturer in Solapur, Maharashtra",
-  url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:8001",
   ogImage: "/og-image.jpg",
   locale: "en-IN",
   companyName: "Arakal Industries",
@@ -63,6 +63,7 @@ export const NAVIGATION = [
   { name: "About", href: "/about" },
   { name: "Resources", href: "/resources" },
   { name: "Locations", href: "/locations" },
+  { name: "Testimonials", href: "/testimonials" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
 ] as const;
