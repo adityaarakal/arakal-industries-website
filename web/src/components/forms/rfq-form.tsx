@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select } from "@/components/ui/select";
+// Using native select for react-hook-form compatibility
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -329,7 +329,7 @@ export function RFQForm({ onSuccess, source = "web", referrer }: RFQFormProps) {
                     >
                       <Checkbox
                         checked={isChecked}
-                        onCheckedChange={(checked) => {
+                        onCheckedChange={(checked: boolean) => {
                           const current = productForm.getValues("productCategories") || [];
                           if (checked) {
                             productForm.setValue("productCategories", [...current, category.value], {
@@ -357,23 +357,31 @@ export function RFQForm({ onSuccess, source = "web", referrer }: RFQFormProps) {
             </div>
             <div>
               <Label htmlFor="volume">Estimated Volume</Label>
-              <Select {...productForm.register("volume")} id="volume" className="mt-2">
+              <select
+                {...productForm.register("volume")}
+                id="volume"
+                className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
                 <option value="">Select volume</option>
                 <option value="small">Small (1-100 units)</option>
                 <option value="medium">Medium (100-1,000 units)</option>
                 <option value="large">Large (1,000-10,000 units)</option>
                 <option value="bulk">Bulk (10,000+ units)</option>
-              </Select>
+              </select>
             </div>
             <div>
               <Label htmlFor="weavePreference">Weave Preference</Label>
-              <Select {...productForm.register("weavePreference")} id="weavePreference" className="mt-2">
+              <select
+                {...productForm.register("weavePreference")}
+                id="weavePreference"
+                className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
                 <option value="">Select preference</option>
                 <option value="terry">Terry</option>
                 <option value="dobby">Dobby</option>
                 <option value="jacquard">Jacquard</option>
                 <option value="custom">Custom</option>
-              </Select>
+              </select>
             </div>
             <div>
               <Label htmlFor="customRequirements">Custom Requirements</Label>
@@ -405,7 +413,7 @@ export function RFQForm({ onSuccess, source = "web", referrer }: RFQFormProps) {
                     >
                       <Checkbox
                         checked={isChecked}
-                        onCheckedChange={(checked) => {
+                        onCheckedChange={(checked: boolean) => {
                           const current = requirementsForm.getValues("certificationRequirements") || [];
                           if (checked) {
                             requirementsForm.setValue("certificationRequirements", [
@@ -428,33 +436,45 @@ export function RFQForm({ onSuccess, source = "web", referrer }: RFQFormProps) {
             </div>
             <div>
               <Label htmlFor="logisticsTimeline">Logistics Timeline</Label>
-              <Select {...requirementsForm.register("logisticsTimeline")} id="logisticsTimeline" className="mt-2">
+              <select
+                {...requirementsForm.register("logisticsTimeline")}
+                id="logisticsTimeline"
+                className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
                 <option value="">Select timeline</option>
                 <option value="urgent">Urgent (Within 1 month)</option>
                 <option value="short">Short-term (1-3 months)</option>
                 <option value="medium">Medium-term (3-6 months)</option>
                 <option value="long">Long-term (6+ months)</option>
-              </Select>
+              </select>
             </div>
             <div>
               <Label htmlFor="facilityPreference">Facility Preference</Label>
-              <Select {...requirementsForm.register("facilityPreference")} id="facilityPreference" className="mt-2">
+              <select
+                {...requirementsForm.register("facilityPreference")}
+                id="facilityPreference"
+                className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
                 <option value="">No preference</option>
                 {facilities.map((facility) => (
                   <option key={facility.value} value={facility.value}>
                     {facility.label}
                   </option>
                 ))}
-              </Select>
+              </select>
             </div>
             <div>
               <Label htmlFor="targetMarket">Target Market</Label>
-              <Select {...requirementsForm.register("targetMarket")} id="targetMarket" className="mt-2">
+              <select
+                {...requirementsForm.register("targetMarket")}
+                id="targetMarket"
+                className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
                 <option value="">Select market</option>
                 <option value="domestic">Domestic (India)</option>
                 <option value="international">International</option>
                 <option value="both">Both</option>
-              </Select>
+              </select>
             </div>
           </div>
         )}
@@ -480,20 +500,24 @@ export function RFQForm({ onSuccess, source = "web", referrer }: RFQFormProps) {
             </div>
             <div>
               <Label htmlFor="preferredContactMethod">Preferred Contact Method</Label>
-              <Select
+              <select
                 {...additionalForm.register("preferredContactMethod")}
                 id="preferredContactMethod"
-                className="mt-2"
+                className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               >
                 <option value="">No preference</option>
                 <option value="email">Email</option>
                 <option value="phone">Phone</option>
                 <option value="whatsapp">WhatsApp</option>
-              </Select>
+              </select>
             </div>
             <div>
               <Label htmlFor="hearAboutUs">How did you hear about us?</Label>
-              <Select {...additionalForm.register("hearAboutUs")} id="hearAboutUs" className="mt-2">
+              <select
+                {...additionalForm.register("hearAboutUs")}
+                id="hearAboutUs"
+                className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              >
                 <option value="">Select option</option>
                 <option value="search">Search Engine</option>
                 <option value="justdial">Justdial</option>
@@ -501,7 +525,7 @@ export function RFQForm({ onSuccess, source = "web", referrer }: RFQFormProps) {
                 <option value="referral">Referral</option>
                 <option value="social">Social Media</option>
                 <option value="other">Other</option>
-              </Select>
+              </select>
             </div>
           </div>
         )}

@@ -2,8 +2,9 @@
 
 import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { trackPageView } from "@/lib/analytics";
+import { hasAnalyticsConsent } from "@/lib/consent";
 
 interface GoogleAnalyticsProps {
   measurementId: string;

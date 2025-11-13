@@ -18,7 +18,7 @@ interface ProductPageProps {
 
 export async function generateStaticParams() {
   const products = await getProducts().catch(() => []);
-  return products.map((product) => ({
+  return products.map((product: any) => ({
     slug: product.slug?.current || product.category,
   }));
 }
@@ -45,13 +45,13 @@ export async function generateMetadata({
       images: product.images?.[0]
         ? [
             {
-              url: urlForImage(product.images[0]),
+              url: urlForImage(product.images[0]) || "",
               width: 1200,
               height: 630,
               alt: product.name,
             },
           ]
-        : [],
+        : undefined,
     },
   };
 }

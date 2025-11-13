@@ -45,7 +45,7 @@ export function ProductsList({ products, className }: ProductsListProps) {
               <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden">
                 <Image
                   src={imageUrl}
-                  alt={product.images[0]?.alt || product.name}
+                  alt={product.images?.[0]?.alt || product.name}
                   fill
                   className="object-cover"
                 />

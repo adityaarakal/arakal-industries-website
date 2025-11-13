@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/lib/constants";
-import { Leaf, Recycle, Water, Sun, ArrowRight } from "lucide-react";
+import { Leaf, Recycle, Droplets, Sun, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Sustainability",
@@ -19,7 +19,7 @@ export default function SustainabilityPage() {
   const commitments = [
     {
       title: "Water Conservation",
-      icon: <Water className="h-8 w-8" />,
+      icon: <Droplets className="h-8 w-8" />,
       description:
         "Implementing water-efficient manufacturing processes and water recycling systems to minimize water consumption.",
     },

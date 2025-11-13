@@ -82,14 +82,14 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   // Filter products by category if filter is provided
   let filteredProducts =
     categoryFilter && categoryFilter !== "all"
-      ? displayProducts.filter((product) => product.category === categoryFilter)
+      ? displayProducts.filter((product: any) => product.category === categoryFilter)
       : displayProducts;
 
   // Filter products by search query if provided
   if (searchQuery) {
     const query = searchQuery.toLowerCase();
     filteredProducts = filteredProducts.filter(
-      (product) =>
+      (product: any) =>
         product.name.toLowerCase().includes(query) ||
         product.description.toLowerCase().includes(query) ||
         product.category.toLowerCase().includes(query) ||
@@ -101,7 +101,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <>
       {/* Structured Data - Product Schema for each product */}
-      {displayProducts.map((product) => (
+      {displayProducts.map((product: any) => (
         <JSONLD
           key={`product-schema-${product._id}`}
           data={generateProductSchema({

@@ -49,7 +49,7 @@ export default async function LocationsPage() {
       {COMPANY_INFO.locations.map((location, index) => (
         <JSONLD
           key={`location-schema-${index}`}
-          data={generateLocalBusinessSchema(location)}
+          data={generateLocalBusinessSchema(location as typeof COMPANY_INFO.locations[0])}
         />
       ))}
       {/* Structured Data - WebSite Schema */}
@@ -71,7 +71,7 @@ export default async function LocationsPage() {
       <section className="py-20">
         <Container>
           <div className="space-y-12">
-            {displayLocations.map((location, index) => {
+            {displayLocations.map((location: any, index: number) => {
               const imageUrl = location.images?.[0] ? urlForImage(location.images[0]) : null;
               return (
                 <div

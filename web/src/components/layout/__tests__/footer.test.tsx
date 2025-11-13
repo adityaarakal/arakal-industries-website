@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import { screen } from "@testing-library/dom";
 import { Footer } from "../footer";
 import { COMPANY_INFO, NAVIGATION, SOCIAL_LINKS } from "@/lib/constants";
 

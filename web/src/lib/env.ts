@@ -79,6 +79,9 @@ export const env = {
   // Analytics
   gtmId: getOptionalEnv("NEXT_PUBLIC_GTM_ID"),
   gaMeasurementId: getOptionalEnv("NEXT_PUBLIC_GA_MEASUREMENT_ID"),
+  gaPropertyId: getOptionalEnv("GOOGLE_ANALYTICS_PROPERTY_ID"),
+  gaCredentials: getOptionalEnv("GOOGLE_ANALYTICS_CREDENTIALS"),
+  analyticsApiKey: getOptionalEnv("ANALYTICS_API_KEY"),
   hotjarId: getOptionalEnv("NEXT_PUBLIC_HOTJAR_ID"),
   
   // Maps

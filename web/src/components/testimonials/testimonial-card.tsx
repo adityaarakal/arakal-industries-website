@@ -55,7 +55,7 @@ export function TestimonialCard({ testimonial, className }: TestimonialCardProps
           <div className="flex items-center space-x-2">
             <h3 className="font-semibold">{testimonial.name}</h3>
             {testimonial.verified && (
-              <CheckCircle2 className="h-4 w-4 text-primary" title="Verified" />
+              <CheckCircle2 className="h-4 w-4 text-primary" aria-label="Verified" />
             )}
           </div>
           {testimonial.role && (
