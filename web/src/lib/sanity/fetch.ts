@@ -16,6 +16,9 @@ import {
   featuredCertificationsQuery,
   clientLogosQuery,
   featuredClientLogosQuery,
+  videosQuery,
+  featuredVideosQuery,
+  videosByCategoryQuery,
 } from "./queries";
 
 // Product fetchers
@@ -216,6 +219,43 @@ export async function getFeaturedClientLogos() {
     return await client.fetch(featuredClientLogosQuery);
   } catch (error) {
     console.error("Error fetching featured client logos:", error);
+    return [];
+  }
+}
+
+// Video fetchers
+export async function getVideos() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(videosQuery);
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+    return [];
+  }
+}
+
+export async function getFeaturedVideos() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(featuredVideosQuery);
+  } catch (error) {
+    console.error("Error fetching featured videos:", error);
+    return [];
+  }
+}
+
+export async function getVideosByCategory(category: string) {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(videosByCategoryQuery, { category });
+  } catch (error) {
+    console.error("Error fetching videos by category:", error);
     return [];
   }
 }

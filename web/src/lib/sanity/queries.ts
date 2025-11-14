@@ -236,3 +236,58 @@ export const featuredClientLogosQuery = groq`*[_type == "clientLogo" && featured
   _updatedAt
 }`;
 
+// Video queries
+export const videosQuery = groq`*[_type == "video"] | order(order asc, title asc) {
+  _id,
+  title,
+  description,
+  videoType,
+  videoId,
+  videoUrl,
+  thumbnail,
+  category,
+  duration,
+  transcript,
+  featured,
+  order,
+  relatedProducts,
+  _createdAt,
+  _updatedAt
+}`;
+
+export const featuredVideosQuery = groq`*[_type == "video" && featured == true] | order(order asc, title asc) {
+  _id,
+  title,
+  description,
+  videoType,
+  videoId,
+  videoUrl,
+  thumbnail,
+  category,
+  duration,
+  transcript,
+  featured,
+  order,
+  relatedProducts,
+  _createdAt,
+  _updatedAt
+}`;
+
+export const videosByCategoryQuery = groq`*[_type == "video" && category == $category] | order(order asc, title asc) {
+  _id,
+  title,
+  description,
+  videoType,
+  videoId,
+  videoUrl,
+  thumbnail,
+  category,
+  duration,
+  transcript,
+  featured,
+  order,
+  relatedProducts,
+  _createdAt,
+  _updatedAt
+}`;
+

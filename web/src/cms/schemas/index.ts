@@ -8,6 +8,7 @@ import page from "./page";
 import settings from "./settings";
 import certification from "./certification";
 import clientLogo from "./clientLogo";
+import video from "./video";
 
 export const schemaTypes = [
   product,
@@ -20,5 +21,6 @@ export const schemaTypes = [
   settings,
   certification,
   clientLogo,
+  video,
 ];
 
