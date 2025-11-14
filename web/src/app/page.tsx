@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { ArrowRight, Factory, Award, Globe, Users } from "lucide-react";
-import { getFeaturedCertifications } from "@/lib/sanity/fetch";
+import { getFeaturedCertifications, getFeaturedClientLogos } from "@/lib/sanity/fetch";
 import { urlForImage } from "@/lib/sanity/image";
+import { ClientLogos } from "@/components/clients/client-logos";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const featuredCertifications = await getFeaturedCertifications().catch(() => []);
+  const featuredClientLogos = await getFeaturedClientLogos().catch(() => []);
 
   return (
     <>

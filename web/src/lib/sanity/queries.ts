@@ -209,3 +209,30 @@ export const featuredCertificationsQuery = groq`*[_type == "certification" && fe
   _updatedAt
 }`;
 
+// Client Logo queries
+export const clientLogosQuery = groq`*[_type == "clientLogo"] | order(order asc, name asc) {
+  _id,
+  name,
+  logo,
+  url,
+  category,
+  description,
+  featured,
+  order,
+  _createdAt,
+  _updatedAt
+}`;
+
+export const featuredClientLogosQuery = groq`*[_type == "clientLogo" && featured == true] | order(order asc, name asc) {
+  _id,
+  name,
+  logo,
+  url,
+  category,
+  description,
+  featured,
+  order,
+  _createdAt,
+  _updatedAt
+}`;
+

@@ -14,6 +14,8 @@ import {
   settingsQuery,
   certificationsQuery,
   featuredCertificationsQuery,
+  clientLogosQuery,
+  featuredClientLogosQuery,
 } from "./queries";
 
 // Product fetchers
@@ -189,6 +191,31 @@ export async function getFeaturedCertifications() {
     return await client.fetch(featuredCertificationsQuery);
   } catch (error) {
     console.error("Error fetching featured certifications:", error);
+    return [];
+  }
+}
+
+// Client Logo fetchers
+export async function getClientLogos() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(clientLogosQuery);
+  } catch (error) {
+    console.error("Error fetching client logos:", error);
+    return [];
+  }
+}
+
+export async function getFeaturedClientLogos() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(featuredClientLogosQuery);
+  } catch (error) {
+    console.error("Error fetching featured client logos:", error);
     return [];
   }
 }
