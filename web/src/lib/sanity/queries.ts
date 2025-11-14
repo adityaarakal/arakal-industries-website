@@ -172,3 +172,40 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
   _updatedAt
 }`;
 
+// Certification queries
+export const certificationsQuery = groq`*[_type == "certification"] | order(order asc, issueDate desc) {
+  _id,
+  name,
+  issuingOrganization,
+  description,
+  certificateNumber,
+  issueDate,
+  expiryDate,
+  category,
+  logo,
+  certificateDocument,
+  featured,
+  order,
+  url,
+  _createdAt,
+  _updatedAt
+}`;
+
+export const featuredCertificationsQuery = groq`*[_type == "certification" && featured == true] | order(order asc, issueDate desc) {
+  _id,
+  name,
+  issuingOrganization,
+  description,
+  certificateNumber,
+  issueDate,
+  expiryDate,
+  category,
+  logo,
+  certificateDocument,
+  featured,
+  order,
+  url,
+  _createdAt,
+  _updatedAt
+}`;
+

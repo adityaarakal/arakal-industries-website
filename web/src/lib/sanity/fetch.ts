@@ -12,6 +12,8 @@ import {
   testimonialsQuery,
   featuredTestimonialsQuery,
   settingsQuery,
+  certificationsQuery,
+  featuredCertificationsQuery,
 } from "./queries";
 
 // Product fetchers
@@ -163,6 +165,31 @@ export async function getSettings() {
   } catch (error) {
     console.error("Error fetching settings:", error);
     return null;
+  }
+}
+
+// Certification fetchers
+export async function getCertifications() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(certificationsQuery);
+  } catch (error) {
+    console.error("Error fetching certifications:", error);
+    return [];
+  }
+}
+
+export async function getFeaturedCertifications() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(featuredCertificationsQuery);
+  } catch (error) {
+    console.error("Error fetching featured certifications:", error);
+    return [];
   }
 }
 

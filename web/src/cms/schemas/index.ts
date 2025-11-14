@@ -6,6 +6,7 @@ import industry from "./industry";
 import resource from "./resource";
 import page from "./page";
 import settings from "./settings";
+import certification from "./certification";
 
 export const schemaTypes = [
   product,
@@ -16,5 +17,6 @@ export const schemaTypes = [
   resource,
   page,
   settings,
+  certification,
 ];
 
