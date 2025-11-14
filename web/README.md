@@ -12,7 +12,7 @@ A modern, responsive promotional website for Arakal Industries, a premium towel 
 - **CMS:** Sanity.io
 - **Email:** Resend
 - **CRM:** HubSpot
-- **Analytics:** Google Analytics 4, Google Tag Manager, Hotjar
+- **Analytics:** Google Analytics 4, Google Tag Manager, Hotjar, Analytics Dashboard
 - **Hosting:** Vercel
 
 ## Getting Started
@@ -136,6 +136,9 @@ See `.env.example` for all required environment variables. Key variables include
 - `RESEND_TO_EMAIL` - Resend to email address for notifications (optional, defaults to company contact email)
 - `NEXT_PUBLIC_GTM_ID` - Google Tag Manager container ID (e.g., GTM-XXXXXXX)
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID` - Google Analytics 4 measurement ID (e.g., G-XXXXXXXXXX)
+- `GOOGLE_ANALYTICS_PROPERTY_ID` - Google Analytics 4 property ID for Analytics Dashboard (e.g., 123456789)
+- `GOOGLE_ANALYTICS_CREDENTIALS` - Google Analytics Data API service account credentials (JSON string)
+- `ANALYTICS_API_KEY` - Optional API key for securing analytics dashboard endpoints
 - `NEXT_PUBLIC_HOTJAR_ID` - Hotjar site ID (optional, for session replay and heatmaps)
 - `NEXT_PUBLIC_MAPPLS_API_KEY` - Mappls API key
 
@@ -159,6 +162,24 @@ The following content types are available in Sanity:
 - **Resource** - Resources (brochures, buyer guides, certifications)
 - **Page** - Custom page content
 - **Settings** - Site settings (contact info, social links)
+
+## Analytics Dashboard
+
+The project includes a comprehensive analytics dashboard for tracking KPIs and generating insights:
+
+- **Dashboard URL:** `/analytics` (e.g., `http://localhost:8001/analytics`)
+- **API Endpoints:**
+  - `GET /api/analytics/kpis` - Fetch KPI metrics for a date range
+  - `GET /api/analytics/insights` - Generate insights and detect anomalies
+- **Features:**
+  - Real-time KPI tracking (traffic, engagement, conversion metrics)
+  - Period-over-period comparison
+  - Automatic anomaly detection
+  - Actionable insights with recommendations
+  - Top pages and referrers analysis
+  - Device breakdown statistics
+
+For detailed setup instructions, see [Analytics Dashboard Documentation](../docs/analytics-dashboard.md).
 
 ## ISR (Incremental Static Regeneration)
 

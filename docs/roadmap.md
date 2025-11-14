@@ -125,9 +125,9 @@
 **Goal:** Transition to steady-state operations and plan continual improvement.
 
 - **Story S17. Performance Monitoring**
-  - T17.1 Track KPIs (traffic, leads, conversions) and heatmaps weekly for first month.
-  - T17.2 Create analytics dashboard snapshots and insights report.
-  - T17.3 Establish alerts and escalation paths for anomalies.
+  - T17.1 Track KPIs (traffic, leads, conversions) and heatmaps weekly for first month. ✅
+  - T17.2 Create analytics dashboard snapshots and insights report. ✅
+  - T17.3 Establish alerts and escalation paths for anomalies. ✅
 - **Story S18. Growth Initiatives**
   - T18.1 Populate optimization backlog (A/B tests, personalization pilots, content gaps).
   - T18.2 Plan blog/editorial calendar for next quarter.
