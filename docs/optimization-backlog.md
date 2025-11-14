@@ -107,17 +107,18 @@ Items are prioritized using the **Impact vs Effort** matrix:
 **Dependencies:** Content strategy, editorial calendar
 
 ### 7. Certifications Display 🏆
-**Status:** Not Started  
+**Status:** Completed  
 **Impact:** Medium | **Effort:** Low  
 **Description:** Display company certifications and quality standards  
 **Tasks:**
-- [ ] Create certifications schema in Sanity
-- [ ] Build certifications page
-- [ ] Add certification badges to homepage
-- [ ] Implement certification schema markup
-- [ ] Add downloadable certificates
+- [x] Create certifications schema in Sanity
+- [x] Build certifications page
+- [x] Add certification badges to homepage
+- [x] Implement certification schema markup
+- [x] Add downloadable certificates
 
-**Estimated Effort:** 3-5 days
+**Estimated Effort:** 3-5 days  
+**Completed:** January 2025
 
 ### 8. Client Logos Section 👥
 **Status:** Not Started  
