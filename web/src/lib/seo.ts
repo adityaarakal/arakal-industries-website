@@ -163,3 +163,33 @@ export function generateWebSiteSchema() {
   };
 }
 
+/**
+ * Generate Certification schema
+ */
+export function generateCertificationSchema(certifications: Array<{
+  name: string;
+  issuingOrganization: string;
+  certificateNumber?: string;
+  issueDate?: string;
+  expiryDate?: string;
+  url?: string;
+}>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: COMPANY_INFO.name,
+    hasCredential: certifications.map((cert) => ({
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: cert.issuingOrganization,
+      recognizedBy: {
+        "@type": "Organization",
+        name: cert.issuingOrganization,
+      },
+      ...(cert.certificateNumber && { identifier: cert.certificateNumber }),
+      ...(cert.issueDate && { dateCreated: cert.issueDate }),
+      ...(cert.expiryDate && { validUntil: cert.expiryDate }),
+      ...(cert.url && { url: cert.url }),
+    })),
+  };
+}
+

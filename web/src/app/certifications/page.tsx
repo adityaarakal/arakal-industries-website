@@ -5,7 +5,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { Award, Download, ExternalLink, Calendar } from "lucide-react";
 import { getCertifications } from "@/lib/sanity/fetch";
 import { urlForImage } from "@/lib/sanity/image";
-import { generateBreadcrumbSchema } from "@/lib/seo";
+import { generateBreadcrumbSchema, generateCertificationSchema } from "@/lib/seo";
 import { JSONLD } from "@/components/seo/json-ld";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -78,6 +78,21 @@ export default async function CertificationsPage() {
           { name: "Certifications", url: `${SITE_CONFIG.url}/certifications` },
         ])}
       />
+      {/* Certification Schema */}
+      {certifications.length > 0 && (
+        <JSONLD
+          data={generateCertificationSchema(
+            certifications.map((cert: Certification) => ({
+              name: cert.name,
+              issuingOrganization: cert.issuingOrganization,
+              certificateNumber: cert.certificateNumber,
+              issueDate: cert.issueDate,
+              expiryDate: cert.expiryDate,
+              url: cert.url,
+            }))
+          )}
+        />
+      )}
 
       {/* Breadcrumbs */}
       <Container className="py-6 print-hide">

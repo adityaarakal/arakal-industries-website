@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { ArrowRight, Factory, Award, Globe, Users } from "lucide-react";
+import { getFeaturedCertifications } from "@/lib/sanity/fetch";
+import { urlForImage } from "@/lib/sanity/image";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -26,7 +29,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featuredCertifications = await getFeaturedCertifications().catch(() => []);
+
   return (
     <>
       {/* Hero Section */}
@@ -132,6 +137,60 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* Certifications Section */}
+      {featuredCertifications.length > 0 && (
+        <section className="py-20 bg-muted/50">
+          <Container>
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
+                <Award className="h-8 w-8" />
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+                Certifications & Quality Standards
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Our commitment to quality is backed by industry-recognized certifications
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {featuredCertifications.map((cert: any) => {
+                const logoUrl = cert.logo ? urlForImage(cert.logo) : null;
+                return (
+                  <div
+                    key={cert._id}
+                    className="bg-background p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow flex items-center justify-center"
+                  >
+                    {logoUrl ? (
+                      <div className="relative w-full h-24">
+                        <Image
+                          src={logoUrl}
+                          alt={cert.logo?.alt || cert.name}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <Award className="h-12 w-12 text-primary mx-auto mb-2" />
+                        <p className="text-sm font-medium">{cert.name}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="text-center mt-8">
+              <Button asChild variant="outline">
+                <Link href="/certifications">
+                  View All Certifications
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Products Section */}
       <section className="py-20 bg-muted/50">
