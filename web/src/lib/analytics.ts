@@ -156,3 +156,15 @@ export function trackSearch(searchQuery: string, resultCount?: number) {
   });
 }
 
+/**
+ * Track social share
+ */
+export function trackSocialShare(platform: string, url: string, title?: string) {
+  trackEvent("social_share", {
+    event_category: "engagement",
+    event_label: platform,
+    share_url: url,
+    share_title: title,
+  });
+}
+

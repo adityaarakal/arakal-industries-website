@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
+import { SocialShare } from "@/components/ui/social-share";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { Package, ArrowRight, Check, Download } from "lucide-react";
 import { getProducts, getProductBySlug } from "@/lib/sanity/fetch";
@@ -149,7 +150,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               )}
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
                 <Button asChild size="lg" className="group">
                   <Link href="/contact">
                     Request Quote
@@ -163,6 +164,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   </Link>
                 </Button>
               </div>
+
+              {/* Social Sharing */}
+              <SocialShare
+                url={`${SITE_CONFIG.url}/products/${slug}`}
+                title={displayProduct.name}
+                description={displayProduct.description}
+                variant="compact"
+              />
             </div>
           </div>
         </Container>
