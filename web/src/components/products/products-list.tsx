@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Package, ArrowRight } from "lucide-react";
 import { urlForImage } from "@/lib/sanity/image";
+import { ProductComparison } from "@/components/products/product-comparison";
 
 interface Product {
   _id: string;
@@ -12,6 +13,10 @@ interface Product {
   category: string;
   features?: string[];
   images?: Array<{ alt?: string; asset?: any }>;
+  gsm?: number;
+  material?: string;
+  colors?: string[];
+  specifications?: Record<string, string>;
 }
 
 interface ProductsListProps {

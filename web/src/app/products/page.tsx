@@ -12,6 +12,7 @@ import { JSONLD } from "@/components/seo/json-ld";
 import { ProductsFilter } from "@/components/products/products-filter";
 import { ProductSearch } from "@/components/products/product-search";
 import { ProductsList } from "@/components/products/products-list";
+import { ProductComparison } from "@/components/products/product-comparison";
 import Image from "next/image";
 
 export const metadata: Metadata = {
