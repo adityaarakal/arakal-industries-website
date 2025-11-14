@@ -135,17 +135,20 @@ Items are prioritized using the **Impact vs Effort** matrix:
 **Completed:** January 2025
 
 ### 9. Video Embeds 🎥
-**Status:** Not Started  
+**Status:** Completed  
 **Impact:** Medium | **Effort:** Low  
 **Description:** Add video support for factory tours and product demos  
 **Tasks:**
-- [ ] Create video schema in Sanity
-- [ ] Build video embed component
-- [ ] Add YouTube/Vimeo integration
-- [ ] Implement video transcripts
-- [ ] Add video to homepage and product pages
+- [x] Create video schema in Sanity
+- [x] Build video embed component
+- [x] Add YouTube/Vimeo integration
+- [x] Implement video transcripts
+- [x] Add video to homepage and product pages
+- [x] Support for custom thumbnails
+- [x] Video categories and related products
 
-**Estimated Effort:** 3-5 days
+**Estimated Effort:** 3-5 days  
+**Completed:** January 2025
 
 ## Priority 3: Advanced Features (4-8 weeks)
 

@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { ArrowRight, Factory, Award, Globe, Users } from "lucide-react";
-import { getFeaturedCertifications, getFeaturedClientLogos } from "@/lib/sanity/fetch";
+import { getFeaturedCertifications, getFeaturedClientLogos, getFeaturedVideos } from "@/lib/sanity/fetch";
 import { urlForImage } from "@/lib/sanity/image";
 import { ClientLogos } from "@/components/clients/client-logos";
+import { VideoEmbed } from "@/components/video/video-embed";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   const featuredCertifications = await getFeaturedCertifications().catch(() => []);
   const featuredClientLogos = await getFeaturedClientLogos().catch(() => []);
+  const featuredVideos = await getFeaturedVideos().catch(() => []);
 
   return (
     <>
@@ -199,6 +201,34 @@ export default async function HomePage() {
         <section className="py-20">
           <Container>
             <ClientLogos logos={featuredClientLogos} variant="carousel" />
+          </Container>
+        </section>
+      )}
+
+      {/* Featured Videos Section */}
+      {featuredVideos.length > 0 && (
+        <section className="py-20 bg-muted/50">
+          <Container>
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Watch Our Story</h2>
+              <p className="text-lg text-muted-foreground">
+                Take a virtual tour of our facilities and see our manufacturing process
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {featuredVideos.slice(0, 2).map((video: any) => (
+                <VideoEmbed
+                  key={video._id}
+                  title={video.title}
+                  videoType={video.videoType}
+                  videoId={video.videoId}
+                  videoUrl={video.videoUrl}
+                  thumbnail={video.thumbnail}
+                  description={video.description}
+                  transcript={video.transcript}
+                />
+              ))}
+            </div>
           </Container>
         </section>
       )}

@@ -9,10 +9,11 @@ import { SocialShare } from "@/components/ui/social-share";
 import { PrintButton } from "@/components/ui/print-button";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { Package, ArrowRight, Check, Download } from "lucide-react";
-import { getProducts, getProductBySlug } from "@/lib/sanity/fetch";
+import { getProducts, getProductBySlug, getVideosByCategory } from "@/lib/sanity/fetch";
 import { urlForImage } from "@/lib/sanity/image";
 import { generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { JSONLD } from "@/components/seo/json-ld";
+import { VideoEmbed } from "@/components/video/video-embed";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -86,6 +87,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
   ];
 
   const imageUrl = displayProduct.images?.[0] ? urlForImage(displayProduct.images[0]) : null;
+  
+  // Fetch related videos (product demos)
+  const productVideos = await getVideosByCategory("product-demo").catch(() => []);
 
   return (
     <>
@@ -267,6 +271,29 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </Container>
       </section>
+
+      {/* Product Videos */}
+      {productVideos.length > 0 && (
+        <section className="py-20">
+          <Container>
+            <h2 className="text-3xl font-bold mb-8 text-center">Product Videos</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {productVideos.slice(0, 2).map((video: any) => (
+                <VideoEmbed
+                  key={video._id}
+                  title={video.title}
+                  videoType={video.videoType}
+                  videoId={video.videoId}
+                  videoUrl={video.videoUrl}
+                  thumbnail={video.thumbnail}
+                  description={video.description}
+                  transcript={video.transcript}
+                />
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Related Products */}
       <section className="py-20 bg-muted/50">
