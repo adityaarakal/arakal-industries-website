@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     description: "Latest news and insights from Arakal Industries",
     url: `${SITE_CONFIG.url}/blog`,
   },
+  alternates: {
+    types: {
+      "application/rss+xml": `${SITE_CONFIG.url}/blog/rss.xml`,
+    },
+  },
 };
 
 // Enable ISR (Incremental Static Regeneration)
