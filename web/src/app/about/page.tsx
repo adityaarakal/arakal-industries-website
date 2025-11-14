@@ -2,9 +2,12 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { Calendar, Factory, Users, Award, ArrowRight } from "lucide-react";
 import { getHeritageTimeline } from "@/lib/sanity/fetch";
+import { generateBreadcrumbSchema } from "@/lib/seo";
+import { JSONLD } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -22,6 +25,10 @@ export const revalidate = 3600; // Revalidate every hour
 export default async function AboutPage() {
   // Fetch heritage timeline from Sanity CMS
   const heritageTimelineItems = await getHeritageTimeline().catch(() => []);
+
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: "About", href: "/about" },
+  ];
 
   // Fallback heritage timeline if CMS is not available
   const fallbackTimeline = [
@@ -79,6 +86,19 @@ export default async function AboutPage() {
 
   return (
     <>
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "About", url: `${SITE_CONFIG.url}/about` },
+        ])}
+      />
+
+      {/* Breadcrumbs */}
+      <Container className="py-6">
+        <Breadcrumbs items={breadcrumbs} />
+      </Container>
+
       {/* Hero Section */}
       <section className="py-20 bg-muted/50">
         <Container>

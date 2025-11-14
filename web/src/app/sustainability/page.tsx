@@ -2,8 +2,11 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Leaf, Recycle, Droplets, Sun, ArrowRight } from "lucide-react";
+import { generateBreadcrumbSchema } from "@/lib/seo";
+import { JSONLD } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Sustainability",
@@ -16,6 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function SustainabilityPage() {
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: "Sustainability", href: "/sustainability" },
+  ];
+
   const commitments = [
     {
       title: "Water Conservation",
@@ -45,6 +52,19 @@ export default function SustainabilityPage() {
 
   return (
     <>
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "Sustainability", url: `${SITE_CONFIG.url}/sustainability` },
+        ])}
+      />
+
+      {/* Breadcrumbs */}
+      <Container className="py-6">
+        <Breadcrumbs items={breadcrumbs} />
+      </Container>
+
       {/* Hero Section */}
       <section className="py-20 bg-muted/50">
         <Container>

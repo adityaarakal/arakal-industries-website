@@ -10,7 +10,7 @@ import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { Package, ArrowRight, Check, Download } from "lucide-react";
 import { getProducts, getProductBySlug } from "@/lib/sanity/fetch";
 import { urlForImage } from "@/lib/sanity/image";
-import { generateProductSchema } from "@/lib/seo";
+import { generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { JSONLD } from "@/components/seo/json-ld";
 
 interface ProductPageProps {
@@ -97,6 +97,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
           sku: displayProduct.slug?.current || displayProduct.category,
           image: imageUrl || undefined,
         })}
+      />
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "Products", url: `${SITE_CONFIG.url}/products` },
+          { name: displayProduct.name, url: `${SITE_CONFIG.url}/products/${slug}` },
+        ])}
       />
 
       {/* Breadcrumbs */}

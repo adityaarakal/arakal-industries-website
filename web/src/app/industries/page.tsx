@@ -2,8 +2,11 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Building2, Hotel, ShoppingBag, Heart, ArrowRight } from "lucide-react";
+import { generateBreadcrumbSchema } from "@/lib/seo";
+import { JSONLD } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Industries",
@@ -16,6 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function IndustriesPage() {
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: "Industries", href: "/industries" },
+  ];
+
   const industries = [
     {
       name: "Hospitality",
@@ -49,6 +56,19 @@ export default function IndustriesPage() {
 
   return (
     <>
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "Industries", url: `${SITE_CONFIG.url}/industries` },
+        ])}
+      />
+
+      {/* Breadcrumbs */}
+      <Container className="py-6">
+        <Breadcrumbs items={breadcrumbs} />
+      </Container>
+
       {/* Hero Section */}
       <section className="py-20 bg-muted/50">
         <Container>

@@ -2,9 +2,12 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { GatedDownload } from "@/components/resources/gated-download";
 import { SITE_CONFIG } from "@/lib/constants";
 import { FileText, Download, BookOpen, ArrowRight } from "lucide-react";
+import { generateBreadcrumbSchema } from "@/lib/seo";
+import { JSONLD } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Resources",
@@ -17,6 +20,10 @@ export const metadata: Metadata = {
 };
 
 export default function ResourcesPage() {
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: "Resources", href: "/resources" },
+  ];
+
   const resources = [
     {
       title: "Product Brochure",
@@ -50,6 +57,19 @@ export default function ResourcesPage() {
 
   return (
     <>
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "Resources", url: `${SITE_CONFIG.url}/resources` },
+        ])}
+      />
+
+      {/* Breadcrumbs */}
+      <Container className="py-6">
+        <Breadcrumbs items={breadcrumbs} />
+      </Container>
+
       {/* Hero Section */}
       <section className="py-20 bg-muted/50">
         <Container>

@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { generateFAQSchema } from "@/lib/seo";
+import { generateFAQSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { JSONLD } from "@/components/seo/json-ld";
 import { HelpCircle } from "lucide-react";
 
@@ -171,6 +171,13 @@ export default function FAQPage() {
     <>
       {/* Structured Data - FAQ Schema */}
       <JSONLD data={generateFAQSchema(allFaqs)} />
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "FAQ", url: `${SITE_CONFIG.url}/faq` },
+        ])}
+      />
 
       {/* Breadcrumbs */}
       <Container className="py-6">

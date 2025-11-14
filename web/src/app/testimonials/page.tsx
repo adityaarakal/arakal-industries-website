@@ -4,6 +4,8 @@ import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { TestimonialsSection } from "@/components/testimonials/testimonials-section";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Quote } from "lucide-react";
+import { generateBreadcrumbSchema } from "@/lib/seo";
+import { JSONLD } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Testimonials",
@@ -22,6 +24,14 @@ export default function TestimonialsPage() {
 
   return (
     <>
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "Testimonials", url: `${SITE_CONFIG.url}/testimonials` },
+        ])}
+      />
+
       {/* Breadcrumbs */}
       <Container className="py-6">
         <Breadcrumbs items={breadcrumbs} />

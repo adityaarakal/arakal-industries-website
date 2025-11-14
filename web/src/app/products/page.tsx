@@ -6,7 +6,8 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { Package, ArrowRight } from "lucide-react";
 import { getProducts } from "@/lib/sanity/fetch";
 import { urlForImage } from "@/lib/sanity/image";
-import { generateProductSchema, generateWebSiteSchema } from "@/lib/seo";
+import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
+import { generateProductSchema, generateWebSiteSchema, generateBreadcrumbSchema } from "@/lib/seo";
 import { JSONLD } from "@/components/seo/json-ld";
 import { ProductsFilter } from "@/components/products/products-filter";
 import { ProductSearch } from "@/components/products/product-search";
@@ -98,6 +99,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     );
   }
 
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: "Products", href: "/products" },
+  ];
+
   return (
     <>
       {/* Structured Data - Product Schema for each product */}
@@ -114,6 +119,18 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       ))}
       {/* Structured Data - WebSite Schema */}
       <JSONLD data={generateWebSiteSchema()} />
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "Products", url: `${SITE_CONFIG.url}/products` },
+        ])}
+      />
+
+      {/* Breadcrumbs */}
+      <Container className="py-6">
+        <Breadcrumbs items={breadcrumbs} />
+      </Container>
 
       {/* Hero Section */}
       <section className="py-20 bg-muted/50">

@@ -2,8 +2,11 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { Factory, Settings, CheckCircle, Award, ArrowRight } from "lucide-react";
+import { generateBreadcrumbSchema } from "@/lib/seo";
+import { JSONLD } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Manufacturing",
@@ -16,6 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function ManufacturingPage() {
+  const breadcrumbs: BreadcrumbItem[] = [
+    { label: "Manufacturing", href: "/manufacturing" },
+  ];
+
   const processes = [
     {
       title: "Weaving",
@@ -68,6 +75,19 @@ export default function ManufacturingPage() {
 
   return (
     <>
+      {/* Breadcrumb Schema */}
+      <JSONLD
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: SITE_CONFIG.url },
+          { name: "Manufacturing", url: `${SITE_CONFIG.url}/manufacturing` },
+        ])}
+      />
+
+      {/* Breadcrumbs */}
+      <Container className="py-6">
+        <Breadcrumbs items={breadcrumbs} />
+      </Container>
+
       {/* Hero Section */}
       <section className="py-20 bg-muted/50">
         <Container>
