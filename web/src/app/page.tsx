@@ -194,6 +194,15 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* Client Logos Section */}
+      {featuredClientLogos.length > 0 && (
+        <section className="py-20">
+          <Container>
+            <ClientLogos logos={featuredClientLogos} variant="carousel" />
+          </Container>
+        </section>
+      )}
+
       {/* Products Section */}
       <section className="py-20 bg-muted/50">
         <Container>
