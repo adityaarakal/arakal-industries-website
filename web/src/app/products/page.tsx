@@ -151,12 +151,18 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         <Container>
           {/* Search and Filter Section */}
           <div className="mb-8 space-y-4">
-            {/* Search Bar */}
-            <div className="max-w-md">
-              <ProductSearch placeholder="Search products by name, description, or features..." />
+            <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+              {/* Search Bar */}
+              <div className="max-w-md flex-1">
+                <ProductSearch placeholder="Search products by name, description, or features..." />
+              </div>
+              {/* Filter */}
+              <ProductsFilter initialCategory={categoryFilter} />
+              {/* Comparison */}
+              <div className="print-hide">
+                <ProductComparison products={displayProducts} />
+              </div>
             </div>
-            {/* Filter */}
-            <ProductsFilter initialCategory={categoryFilter} />
             {/* Search Results Info */}
             {searchQuery && (
               <div className="text-sm text-muted-foreground">
