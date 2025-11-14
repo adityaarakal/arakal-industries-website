@@ -291,3 +291,94 @@ export const videosByCategoryQuery = groq`*[_type == "video" && category == $cat
   _updatedAt
 }`;
 
+// Blog queries
+export const blogPostsQuery = groq`*[_type == "blogPost" && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  author,
+  publishedAt,
+  featuredImage,
+  categories[]-> {
+    _id,
+    title,
+    slug
+  },
+  tags,
+  featured,
+  seo,
+  _createdAt,
+  _updatedAt
+}`;
+
+export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug && defined(publishedAt) && publishedAt <= now()][0] {
+  _id,
+  title,
+  slug,
+  excerpt,
+  author,
+  publishedAt,
+  featuredImage,
+  content,
+  categories[]-> {
+    _id,
+    title,
+    slug
+  },
+  tags,
+  featured,
+  seo,
+  _createdAt,
+  _updatedAt
+}`;
+
+export const featuredBlogPostsQuery = groq`*[_type == "blogPost" && featured == true && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc) [0...6] {
+  _id,
+  title,
+  slug,
+  excerpt,
+  author,
+  publishedAt,
+  featuredImage,
+  categories[]-> {
+    _id,
+    title,
+    slug
+  },
+  tags,
+  featured,
+  seo,
+  _createdAt,
+  _updatedAt
+}`;
+
+export const blogPostsByCategoryQuery = groq`*[_type == "blogPost" && $categoryId in categories[]._ref && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc) {
+  _id,
+  title,
+  slug,
+  excerpt,
+  author,
+  publishedAt,
+  featuredImage,
+  categories[]-> {
+    _id,
+    title,
+    slug
+  },
+  tags,
+  featured,
+  seo,
+  _createdAt,
+  _updatedAt
+}`;
+
+export const blogCategoriesQuery = groq`*[_type == "blogCategory"] | order(title asc) {
+  _id,
+  title,
+  slug,
+  description,
+  _createdAt,
+  _updatedAt
+}`;
+

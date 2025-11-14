@@ -19,6 +19,11 @@ import {
   videosQuery,
   featuredVideosQuery,
   videosByCategoryQuery,
+  blogPostsQuery,
+  blogPostBySlugQuery,
+  featuredBlogPostsQuery,
+  blogPostsByCategoryQuery,
+  blogCategoriesQuery,
 } from "./queries";
 
 // Product fetchers
@@ -256,6 +261,67 @@ export async function getVideosByCategory(category: string) {
     return await client.fetch(videosByCategoryQuery, { category });
   } catch (error) {
     console.error("Error fetching videos by category:", error);
+    return [];
+  }
+}
+
+// Blog fetchers
+export async function getBlogPosts() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(blogPostsQuery);
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    return [];
+  }
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  try {
+    if (!projectId) {
+      return null;
+    }
+    return await client.fetch(blogPostBySlugQuery, { slug });
+  } catch (error) {
+    console.error("Error fetching blog post by slug:", error);
+    return null;
+  }
+}
+
+export async function getFeaturedBlogPosts() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(featuredBlogPostsQuery);
+  } catch (error) {
+    console.error("Error fetching featured blog posts:", error);
+    return [];
+  }
+}
+
+export async function getBlogPostsByCategory(categoryId: string) {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(blogPostsByCategoryQuery, { categoryId });
+  } catch (error) {
+    console.error("Error fetching blog posts by category:", error);
+    return [];
+  }
+}
+
+export async function getBlogCategories() {
+  try {
+    if (!projectId) {
+      return [];
+    }
+    return await client.fetch(blogCategoriesQuery);
+  } catch (error) {
+    console.error("Error fetching blog categories:", error);
     return [];
   }
 }
