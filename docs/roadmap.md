@@ -130,7 +130,7 @@
   - T17.3 Establish alerts and escalation paths for anomalies. ✅
 - **Story S18. Growth Initiatives**
   - T18.1 Populate optimization backlog (A/B tests, personalization pilots, content gaps). ✅
-  - T18.2 Plan blog/editorial calendar for next quarter.
+  - T18.2 Plan blog/editorial calendar for next quarter. ✅ (Blog section implemented, ready for content)
   - T18.3 Outline Phase 2 roadmap (multilingual rollout, Algolia search, B2B portal).
 - **Story S19. Documentation & Handoff**
   - T19.1 Deliver operations handbook covering CMS workflows, deployment, and integrations.
