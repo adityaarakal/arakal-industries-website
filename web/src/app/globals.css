@@ -107,3 +107,197 @@ html {
 .animate-accordion-up {
   animation: accordion-up 0.2s ease-out;
 }
+
+/* Print Styles */
+@media print {
+  /* Hide non-essential elements */
+  header,
+  footer,
+  nav,
+  .no-print,
+  button:not(.print-button),
+  .social-share,
+  .breadcrumbs,
+  .print-hide {
+    display: none !important;
+  }
+
+  /* Page setup */
+  @page {
+    margin: 1.5cm;
+    size: A4;
+  }
+
+  /* Base styles for print */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+
+  /* Typography */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    color: #000;
+  }
+
+  h1 {
+    font-size: 24pt;
+    margin-bottom: 12pt;
+  }
+
+  h2 {
+    font-size: 18pt;
+    margin-bottom: 10pt;
+  }
+
+  h3 {
+    font-size: 14pt;
+    margin-bottom: 8pt;
+  }
+
+  /* Links */
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Containers */
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* Sections */
+  section {
+    page-break-inside: avoid;
+    margin-bottom: 20pt;
+  }
+
+  /* Product details */
+  .product-details {
+    page-break-inside: avoid;
+  }
+
+  /* Specifications table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    page-break-inside: avoid;
+  }
+
+  table th,
+  table td {
+    border: 1px solid #000;
+    padding: 8pt;
+    text-align: left;
+  }
+
+  table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    page-break-inside: avoid;
+    margin-left: 20pt;
+  }
+
+  li {
+    page-break-inside: avoid;
+  }
+
+  /* Avoid breaking inside these elements */
+  .no-break {
+    page-break-inside: avoid;
+  }
+
+  /* Page breaks */
+  .page-break-before {
+    page-break-before: always;
+  }
+
+  .page-break-after {
+    page-break-after: always;
+  }
+
+  /* Company info for print */
+  .print-header {
+    display: block;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10pt;
+    margin-bottom: 20pt;
+  }
+
+  .print-header h1 {
+    margin-bottom: 5pt;
+  }
+
+  .print-header p {
+    margin: 2pt 0;
+    font-size: 10pt;
+  }
+
+  /* Product specifications */
+  .product-specs {
+    page-break-inside: avoid;
+  }
+
+  .product-specs dl {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 8pt;
+  }
+
+  .product-specs dt {
+    font-weight: bold;
+  }
+
+  .product-specs dd {
+    margin: 0;
+  }
+
+  /* Contact information */
+  .print-contact {
+    margin-top: 30pt;
+    padding-top: 20pt;
+    border-top: 1px solid #000;
+    font-size: 10pt;
+  }
+
+  /* Footer for print */
+  .print-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 9pt;
+    color: #666;
+    border-top: 1px solid #000;
+    padding-top: 5pt;
+  }
+}

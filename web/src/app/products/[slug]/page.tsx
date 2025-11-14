@@ -6,6 +6,7 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
 import { SocialShare } from "@/components/ui/social-share";
+import { PrintButton } from "@/components/ui/print-button";
 import { SITE_CONFIG, COMPANY_INFO } from "@/lib/constants";
 import { Package, ArrowRight, Check, Download } from "lucide-react";
 import { getProducts, getProductBySlug } from "@/lib/sanity/fetch";
@@ -108,9 +109,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
       />
 
       {/* Breadcrumbs */}
-      <Container className="py-6">
+      <Container className="py-6 print-hide">
         <Breadcrumbs items={breadcrumbs} />
       </Container>
+
+      {/* Print Header */}
+      <div className="print-header hidden print:block">
+        <h1>{displayProduct.name}</h1>
+        <p>{COMPANY_INFO.name}</p>
+        <p>{COMPANY_INFO.address.street}, {COMPANY_INFO.address.city}, {COMPANY_INFO.address.state} {COMPANY_INFO.address.zip}</p>
+        <p>Phone: {COMPANY_INFO.phone} | Email: {COMPANY_INFO.email}</p>
+        <p>Website: {SITE_CONFIG.url}</p>
+      </div>
 
       {/* Hero Section */}
       <section className="py-12 bg-muted/50">
@@ -171,28 +181,31 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     Download Brochure
                   </Link>
                 </Button>
+                <PrintButton variant="outline" size="lg" className="print-hide" />
               </div>
 
               {/* Social Sharing */}
-              <SocialShare
-                url={`${SITE_CONFIG.url}/products/${slug}`}
-                title={displayProduct.name}
-                description={displayProduct.description}
-                variant="compact"
-              />
+              <div className="print-hide">
+                <SocialShare
+                  url={`${SITE_CONFIG.url}/products/${slug}`}
+                  title={displayProduct.name}
+                  description={displayProduct.description}
+                  variant="compact"
+                />
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
       {/* Product Details */}
-      <section className="py-20">
+      <section className="py-20 product-details">
         <Container>
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold mb-8">Product Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Specifications */}
-              <div className="bg-card border rounded-lg p-6">
+              <div className="bg-card border rounded-lg p-6 product-specs">
                 <h3 className="text-xl font-semibold mb-4">Specifications</h3>
                 <dl className="space-y-3">
                   <div>
@@ -287,6 +300,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </Container>
       </section>
+
+      {/* Print Footer */}
+      <div className="print-footer hidden print:block">
+        <p>
+          {COMPANY_INFO.name} | {SITE_CONFIG.url} | Printed on {new Date().toLocaleDateString()}
+        </p>
+      </div>
     </>
   );
 }
